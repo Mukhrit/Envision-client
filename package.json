@@ -2,16 +2,18 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
-    "/api/*": {
-      "target": "http://localhost:5000"
-    }
-  },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "aos": "^2.3.4",
     "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
+    "classnames": "^2.2.6",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
