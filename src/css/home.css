@@ -1,13 +1,13 @@
 #hero {
   width: 100%;
- 
+
   position: relative;
   padding: 120px 0 0 0;
 }
 
 #hero:before {
-  content: "";
-  background:#17252A;
+  content: '';
+  background: #17252a;
   position: absolute;
   bottom: 0;
   top: 0;
@@ -35,7 +35,7 @@
 }
 
 #hero .btn-get-started {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;

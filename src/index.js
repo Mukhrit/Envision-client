@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.min.css";
-import "aos/dist/aos.css";
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import 'aos/dist/aos.css';
 import './index.css';
 import App from './App';
 
+//import reducers from './reducers';
 import * as serviceWorker from './serviceWorker';
 
-//dummy store for now
-
+//const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 ReactDOM.render(
   <React.StrictMode>
-      <App />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
