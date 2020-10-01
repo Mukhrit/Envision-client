@@ -30,6 +30,7 @@ export const Auth = (
         isAuthenticated: true,
         errMess: "",
         token: action.token,
+        user:action.creds
       };
     case ActionTypes.LOGIN_FAILURE:
       return {
