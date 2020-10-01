@@ -1,8 +1,7 @@
-import * as ActionTypes from "./ActionTypes";
-import { baseUrl } from "../shared/baseUrl";
+import * as ActionTypes from './ActionTypes';
+import { baseUrl } from '../shared/baseUrl';
 import axios from 'axios';
-import { browserHistory } from "../history";
-
+import { browserHistory } from '../history';
 
 // export const requestLogin = (creds) => {
 //   return {
@@ -23,11 +22,11 @@ import { browserHistory } from "../history";
 //     message,
 //   };
 // };
-export const receiveLogin = (response,creds) => {
+export const receiveLogin = (response, creds) => {
   return {
     type: ActionTypes.LOGIN_SUCCESS,
     token: response.token,
-    creds
+    creds,
   };
 };
 export const loginError = (message) => {
@@ -36,24 +35,48 @@ export const loginError = (message) => {
     message,
   };
 };
-export const loginUser = (profileObj) => (dispatch,Ownprops) => {
+export const loginUser = (profileObj) => (dispatch, Ownprops) => {
   // We dispatch requestLogin to kickoff the call to the API
 
-  return axios.post(baseUrl + "google/signin", {profileObj})
+  return axios
+    .post(baseUrl + 'google/signin', { profileObj })
     .then((response) => response.data)
     .then((response) => {
       if (response.success) {
-        var creds={user_id:response.user._id,displayname:response.user.displayname,username:response.user.envision_handle};
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("creds", JSON.stringify(creds));
+        var creds = {
+          user_id: response.user._id,
+          displayname: response.user.displayname,
+          username: response.user.envision_handle,
+        };
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('creds', JSON.stringify(creds));
         // Dispatch the success action
-        dispatch(receiveLogin(response,creds));
-  
+        dispatch(receiveLogin(response, creds));
       } else {
-        var error = new Error("Error " + response.status);
+        var error = new Error('Error ' + response.status);
         error.response = response;
         throw error;
       }
     })
     .catch((error) => dispatch(loginError(error.message)));
+};
+export const requestLogout = () => {
+  return {
+    type: ActionTypes.LOGOUT_REQUEST,
+  };
+};
+
+export const receiveLogout = () => {
+  return {
+    type: ActionTypes.LOGOUT_SUCCESS,
+  };
+};
+
+// Logs the user out
+export const logoutUser = () => (dispatch) => {
+  dispatch(requestLogout());
+  localStorage.removeItem('token');
+  localStorage.removeItem('creds');
+
+  dispatch(receiveLogout());
 };

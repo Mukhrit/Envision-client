@@ -1,4 +1,4 @@
-import * as ActionTypes from "./ActionTypes";
+import * as ActionTypes from './ActionTypes';
 
 // The auth reducer. The starting state sets authentication
 // based on a token being in local storage. In a real app,
@@ -6,10 +6,10 @@ import * as ActionTypes from "./ActionTypes";
 export const Auth = (
   state = {
     isLoading: false,
-    isAuthenticated: localStorage.getItem("token") ? true : false,
-    token: localStorage.getItem("token"),
-    user: localStorage.getItem("creds")
-      ? JSON.parse(localStorage.getItem("creds"))
+    isAuthenticated: localStorage.getItem('token') ? true : false,
+    token: localStorage.getItem('token'),
+    user: localStorage.getItem('creds')
+      ? JSON.parse(localStorage.getItem('creds'))
       : null,
     errMess: null,
   },
@@ -28,9 +28,9 @@ export const Auth = (
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        errMess: "",
+        errMess: '',
         token: action.token,
-        user:action.creds
+        user: action.creds,
       };
     case ActionTypes.LOGIN_FAILURE:
       return {
@@ -46,7 +46,7 @@ export const Auth = (
         ...state,
         isLoading: false,
         isAuthenticated: false,
-        token: "",
+        token: '',
         user: null,
       };
     default:
