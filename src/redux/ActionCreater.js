@@ -1,7 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 import axios from 'axios';
-import { browserHistory } from "../history";
 
 
 // export const requestLogin = (creds) => {
@@ -23,11 +22,12 @@ import { browserHistory } from "../history";
 //     message,
 //   };
 // };
-export const receiveLogin = (response,creds) => {
+export const receiveLogin = (response,creds,isUsername) => {
   return {
     type: ActionTypes.LOGIN_SUCCESS,
     token: response.token,
-    creds
+    creds,
+    isUsername
   };
 };
 export const loginError = (message) => {
@@ -44,10 +44,16 @@ export const loginUser = (profileObj) => (dispatch,Ownprops) => {
     .then((response) => {
       if (response.success) {
         var creds={user_id:response.user._id,displayname:response.user.displayname,username:response.user.envision_handle};
+        var isUsername;
+        if(creds.username){
+         isUsername=true;
+        }else{
+          isUsername = false;
+        }
         localStorage.setItem("token", response.token);
         localStorage.setItem("creds", JSON.stringify(creds));
         // Dispatch the success action
-        dispatch(receiveLogin(response,creds));
+        dispatch(receiveLogin(response,creds,isUsername));
   
       } else {
         var error = new Error("Error " + response.status);
@@ -56,4 +62,21 @@ export const loginUser = (profileObj) => (dispatch,Ownprops) => {
       }
     })
     .catch((error) => dispatch(loginError(error.message)));
+};
+export const requestLogout = () => {
+  return {
+    type: ActionTypes.LOGOUT_REQUEST,
+  };
+};
+
+export const receiveLogout = () => {
+  return {
+    type: ActionTypes.LOGOUT_SUCCESS,
+  };
+};
+export const logoutUser = () => (dispatch) => {
+  dispatch(requestLogout());
+  localStorage.removeItem("token");
+  localStorage.removeItem("creds");
+  dispatch(receiveLogout());
 };

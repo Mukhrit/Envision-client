@@ -20,19 +20,34 @@ class Main extends Component {
       const Loginload=({match})=>{
         return(<Login  loginUser={this.props.loginUser} auth={this.props.auth}/>);
       }
+       const PrivateRouteHome = ({ component: Component, ...rest }) => (
+         <Route
+           {...rest}
+           render={(props) =>
+            (this.props.auth.isUsername || this.props.auth.isAuthenticated===false)? (
+               <Component {...props} />
+             ) : (
+               <Redirect
+                 to={{
+                   pathname: "/filldetails",
+                   state: { from: props.location },
+                 }}
+               />
+             )
+           }
+         />
+       );
+
         return (
           <div>
-          { (this.props.auth.isAuthenticated===true && this.props.auth.user.username!==null)?
-            (<Switch>
-              <Route path="/home" component={()=><Home/>} />
+            <Header/>
+             <Switch>
+              <PrivateRouteHome path="/home" component={()=><Home/>} />
               <Route path="/filldetails" component={()=><Filldetails/>}/>
               <Route path="/loginload" component={Loginload}/>
               <Redirect to="/home" />
-            </Switch>)
-            :
-             (<Switch>
-              <Redirect path="/filldetails" component={()=><Filldetails/>}/>
-            </Switch>)}
+            </Switch>
+            <Footer/>
           </div>
         );
     }

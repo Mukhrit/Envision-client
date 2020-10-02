@@ -28,6 +28,7 @@ export const Auth = (
         ...state,
         isLoading: false,
         isAuthenticated: true,
+        isUsername:action.isUsername,
         errMess: "",
         token: action.token,
         user:action.creds
@@ -36,6 +37,7 @@ export const Auth = (
       return {
         ...state,
         isLoading: false,
+        isUsername: true,
         isAuthenticated: false,
         errMess: action.message,
       };
@@ -46,6 +48,7 @@ export const Auth = (
         ...state,
         isLoading: false,
         isAuthenticated: false,
+        isUsername: true,
         token: "",
         user: null,
       };
