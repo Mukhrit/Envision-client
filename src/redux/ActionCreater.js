@@ -1,7 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
-import axios from 'axios';
-
+import axios from "axios";
 
 // export const requestLogin = (creds) => {
 //   return {
@@ -22,12 +21,12 @@ import axios from 'axios';
 //     message,
 //   };
 // };
-export const receiveLogin = (response,creds,isUsername) => {
+export const receiveLogin = (response, creds, isUsername) => {
   return {
     type: ActionTypes.LOGIN_SUCCESS,
     token: response.token,
     creds,
-    isUsername
+    isUsername,
   };
 };
 export const loginError = (message) => {
@@ -36,25 +35,29 @@ export const loginError = (message) => {
     message,
   };
 };
-export const loginUser = (profileObj) => (dispatch,Ownprops) => {
+export const loginUser = (profileObj) => (dispatch, Ownprops) => {
   // We dispatch requestLogin to kickoff the call to the API
 
-  return axios.post(baseUrl + "google/signin", {profileObj})
+  return axios
+    .post(baseUrl + "google/signin", { profileObj })
     .then((response) => response.data)
     .then((response) => {
       if (response.success) {
-        var creds={user_id:response.user._id,displayname:response.user.displayname,username:response.user.envision_handle};
+        var creds = {
+          user_id: response.user._id,
+          displayname: response.user.displayname,
+          username: response.user.envision_handle,
+        };
         var isUsername;
-        if(creds.username){
-         isUsername=true;
-        }else{
+        if (creds.username) {
+          isUsername = true;
+        } else {
           isUsername = false;
         }
         localStorage.setItem("token", response.token);
         localStorage.setItem("creds", JSON.stringify(creds));
         // Dispatch the success action
-        dispatch(receiveLogin(response,creds,isUsername));
-  
+        dispatch(receiveLogin(response, creds, isUsername));
       } else {
         var error = new Error("Error " + response.status);
         error.response = response;

@@ -44,11 +44,10 @@
   border-radius: 50px;
   transition: 0.5s;
   color: #fff;
-  background: #1acc8d;
-}
+ background: #3acabb;}
 
 #hero .btn-get-started:hover {
-  background: #17b57d;
+  background: #3acabb;
 }
 
 #hero .animated {

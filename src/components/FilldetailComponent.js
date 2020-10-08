@@ -277,7 +277,7 @@ export class Filldetails extends Component {
       <div className="form-bg-10">
         <div className="form-details-10">
           <Form onSubmit={(e) => this.handleSubmit(e)}>
-            <span className="form-title-10">Hello Rakshit!</span>
+    <span className="form-title-10">Hello {this.props.auth.user!==null?this.props.auth.user.displayname:"Rakshit"}!</span>
             <div className="form-group wrap-input-10">
               <label htmlFor="username" className="lable-input-10">
                 Envision Username
