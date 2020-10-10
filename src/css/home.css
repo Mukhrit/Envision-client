@@ -1,3 +1,6 @@
+.home_div{
+  overflow-x: hidden;
+}
 #hero {
   width: 100%;
 

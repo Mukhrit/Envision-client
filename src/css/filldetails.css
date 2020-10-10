@@ -1,22 +1,21 @@
 .form-bg-10{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    overflow-x: hidden;
     background: linear-gradient(45deg, #00dbd0, #17252A);
      justify-content: center;
      align-items: center;
       display: flex;
+    width: 100%;
+  height: 100vh;
       
 }
 .form-details-10{
-    
-    width: 500px;
+    width: 350px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  padding: 40px 50px 50px 50px;
-  margin-top: 70px;
-  margin-bottom: 50px;
+  padding: 40px 50px 0px 50px;
+  margin-top: 65px;
+  
 }
 .form-title-10{
      display: block;
@@ -112,19 +111,20 @@ input.input-txt-10:-ms-input-placeholder { color: #adadad;}
 
 @media (max-width: 576px) {
   .form-details-10 {
-
-    margin: 72px 15px 65px 15px ;
+    width: 300px;
+    padding: 10px 15px 0px 15px ;
   }
 }
 .form-btn-10{
-  border: none;
-   position: absolute;
-  display: block;
-  width: 100%;
+  position: relative; 
+  display: flex;
+  justify-content: center;
 }
 .form-btn-inner-10{
-  background-color:#17251A;;
-  width: 20%;
+  
+  background-color:#17251A;
+  width: 100px;
+  border: none;
   border-radius: 25px;
   height: 40px;
     margin-bottom: 10px;

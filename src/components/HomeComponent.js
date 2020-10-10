@@ -16,7 +16,7 @@ export class Home extends Component {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
+        console.log(result.additionalUserInfo.profile);
       })
       .catch((error) => alert(error.message));
 
@@ -24,7 +24,7 @@ export class Home extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="home_div">
         <section id="hero">
           <div class="container">
             <div class="row">
@@ -93,9 +93,9 @@ export class Home extends Component {
             </g>
           </svg>
         </section>
-        <Button type="submit" onClick={this.signin}>
+        {/* <Button type="submit" onClick={this.signin}>
           Google
-        </Button>
+        </Button> */}
         <About />
         <Features />
       </div>

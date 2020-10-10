@@ -137,7 +137,7 @@ export class Header extends Component {
       });
     });
 
-    // Toggle .header-scrolled class to #header when page is scrolled
+    // Toggle .header-scrolled Class to #header when page is scrolled
     $(window).scroll(function () {
       if ($(this).scrollTop() > 100) {
         $('#header').addClass('header-scrolled');
@@ -190,22 +190,22 @@ export class Header extends Component {
       <div>
         <header
           id="header"
-          class="fixed-top d-flex align-items-center header-transparent"
+          className="fixed-top d-flex align-items-center header-transparent"
         >
-          <div class="container d-flex align-items-center">
-            <div class="logo mr-auto">
-              <h1 class="text-light">
+          <div className="container d-flex align-items-center">
+            <div className="logo mr-auto">
+              <h1 className="text-light">
                 <NavLink to="/home">
                   <span>Envision</span>
                 </NavLink>
               </h1>
               {/* <!-- Uncomment below if you prefer to use an image logo --> */}
-              {/* <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>--> */}
+              {/* <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
             </div>
 
-            <nav class="nav-menu d-none d-lg-block">
+            <nav className="nav-menu d-none d-lg-block">
               <ul>
-                <li class="active">
+                <li className="active">
                   <a href="index.html">Home</a>
                 </li>
                 <li>

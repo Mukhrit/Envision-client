@@ -22,7 +22,8 @@ class Main extends Component {
     const Loginload = ({ match }) => {
       return <Login loginUser={this.props.loginUser} auth={this.props.auth} />;
     };
-    const PrivateRouteHome = ({ component: Component, ...rest }) => (
+   
+     const PrivateRouteHome = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
         render={(props) =>
@@ -40,6 +41,24 @@ class Main extends Component {
         }
       />
     );
+    const PrivateRouteFilldetails = ({ component: Component, ...rest }) => (
+      <Route
+        {...rest}
+        render={(props) =>
+          this.props.auth.isAuthenticated === true &&  this.props.auth.isUsername===false? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/home",
+                state: { from: props.location },
+              }}
+            />
+          )
+        }
+      />
+    );
+
 
     return (
       <div>
@@ -62,7 +81,7 @@ class Main extends Component {
             )}
           />
           <PrivateRouteHome path="/home" component={() => <Home />} />
-          <Route path="/filldetails" component={() => <Filldetails auth={this.props.auth}/>} />
+          <PrivateRouteFilldetails path="/filldetails" component={() => <Filldetails auth={this.props.auth}/>} />
           <Route path="/loginload" component={Loginload} />
           <Redirect to="/home" />
         </Switch>
