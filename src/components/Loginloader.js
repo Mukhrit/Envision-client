@@ -2,26 +2,13 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 //import { Redirect } from "react-router-dom";
 import GoogleLogin from 'react-google-login';
+import LoginModal from './LoginModal';
 import axios from 'axios';
 
 class Login extends Component {
   constructor(props) {
     super(props);
   }
-  // test(){
-  //   console.log("check");
-  //   axios
-  //     .get("http://localhost:5000/google/signin", {
-  //       headers: {
-  //         'Access-Control-Allow-Credentials':'http://localhost:3000',
-  //         "Access-Control-Allow-Origin": true,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
 
   render() {
     const responseGoogle = (response) => {
@@ -38,6 +25,7 @@ class Login extends Component {
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
         ></GoogleLogin>
+
         {/* <a href="http://localhost:5000/google/signin">
           <Button color="primary">primary</Button>{" "}
         </a> */}

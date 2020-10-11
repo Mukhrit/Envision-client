@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
-import {Button} from 'reactstrap';
-import { auth, provider } from "../firebase";
+import { NavLink } from 'react-router-dom';
+import { Button } from 'reactstrap';
+import { auth, provider } from '../firebase';
 import '../css/header.css';
 import $ from 'jquery';
 import LoginModal from './LoginModal';
 
 export class Header extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.signin=this.signin.bind(this);
+    this.signin = this.signin.bind(this);
   }
   componentDidMount() {
     // Preloader
@@ -176,8 +176,8 @@ export class Header extends Component {
     // Initiate venobox lightbo
     // Init AOS
   }
-  signin(){
-     console.log("check");
+  signin() {
+    console.log('check');
     auth
       .signInWithPopup(provider)
       .then((result) => {
@@ -189,13 +189,13 @@ export class Header extends Component {
     return (
       <div>
         <header
-          id="header"
-          className="fixed-top d-flex align-items-center header-transparent"
+          id='header'
+          className='fixed-top d-flex align-items-center header-transparent'
         >
-          <div className="container d-flex align-items-center">
-            <div className="logo mr-auto">
-              <h1 className="text-light">
-                <NavLink to="/home">
+          <div className='container d-flex align-items-center'>
+            <div className='logo mr-auto'>
+              <h1 className='text-light'>
+                <NavLink to='/home'>
                   <span>Envision</span>
                 </NavLink>
               </h1>
@@ -203,20 +203,25 @@ export class Header extends Component {
               {/* <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
             </div>
 
-            <nav className="nav-menu d-none d-lg-block">
+            <nav className='nav-menu d-none d-lg-block'>
               <ul>
-                <li className="active">
-                  <a href="index.html">Home</a>
+                <li className='active'>
+                  <a href='index.html'>Home</a>
                 </li>
                 <li>
-                  <a href="#about">About</a>
+                  <a href='#about'>About</a>
                 </li>
                 <li>
-                  <a href="#">Features</a>
+                  <a href='#'>Features</a>
+                </li>
+                <li>
+                  <a href='#'>
+                    <LoginModal />
+                  </a>
                 </li>
                 {this.props.auth.isAuthenticated ? (
                   <li>
-                    <a href="#">{this.props.auth.user.displayname}</a>
+                    <a href='#'>{this.props.auth.user.displayname}</a>
                   </li>
                 ) : null}
                 <li>
@@ -226,7 +231,6 @@ export class Header extends Component {
                     logoutUser={this.props.logoutUser}
                     auth={this.props.auth}
                   /> */}
-                 
                 </li>
               </ul>
             </nav>
