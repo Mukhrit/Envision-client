@@ -50,7 +50,7 @@ class Main extends Component {
           ) : (
             <Redirect
               to={{
-                pathname: "/home",
+                pathname: '/home',
                 state: { from: props.location },
               }}
             />
@@ -58,7 +58,6 @@ class Main extends Component {
         }
       />
     );
-
 
     return (
       <div>
@@ -70,10 +69,9 @@ class Main extends Component {
         <Switch>
           <Route
             exact
-            path="/loginmodal"
+            path='/loginmodal'
             component={() => (
               <LoginModal
-                buttonLabel="open modal"
                 loginUser={this.props.loginUser}
                 logoutUser={this.props.logoutUser}
                 auth={this.props.auth}
