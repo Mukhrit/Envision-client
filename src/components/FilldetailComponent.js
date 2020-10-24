@@ -28,7 +28,7 @@ export class Filldetails extends Component {
     this.validateUsername = this.validateUsername.bind(this);
   }
    async handleSubmit(e) {
-    e.preventDefault();
+       e.preventDefault();
     await this.checkUsername();
     await this.checkCodechef();
     await this.checkCodeforces();
@@ -41,9 +41,15 @@ export class Filldetails extends Component {
         this.state.codeforces_username === "") &&
       ((this.state.leetcodeValid && this.state.leetcode_username !== "") ||
         this.state.leetcode_username === "")
-    )
+    ){
+      var user_details={};
+        user_details.envision_handle = this.state.username;
+        user_details.codechef_handle = this.state.codechef_username;
+        user_details.codeforces_handle = this.state.codeforces_username;
+        user_details.leetcode_handle = this.state.leetcode_username;
+      this.props.filldetailsUser(user_details);
       console.log(this.state);
-    else {
+    }else {
       console.log({success:false});
     }
   }

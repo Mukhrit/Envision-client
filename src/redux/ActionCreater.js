@@ -83,3 +83,33 @@ export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("creds");
   dispatch(receiveLogout());
 };
+export const receiveDetails = (creds, isUsername) => {
+  return {
+    type: ActionTypes.FILLDETAILS_SUCCESS,
+    creds,
+    isUsername,
+  };
+};
+export const filldetailsUser = (details) => (dispatch) => {
+  return axios
+    .post(baseUrl + "users/filldetails", { ...details })
+    .then((res) => res.data)
+    .then((response) => {
+       var creds = {
+         user_id: response.user._id,
+         displayname: response.user.displayname,
+         username: response.user.envision_handle
+       };
+        var isUsername;
+        if (creds.username) {
+          isUsername = true;
+        } else {
+          isUsername = false;
+        }
+         localStorage.setItem("creds", JSON.stringify(creds));
+        // Dispatch the success action
+        dispatch(receiveDetails(creds, isUsername));
+    })
+    .catch((error) => dispatch(loginError(error.message)));
+
+};

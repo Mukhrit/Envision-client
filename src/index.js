@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './black-dashboard-react.scss';
 import 'font-awesome/css/font-awesome.min.css';
 import 'aos/dist/aos.css';
 import './index.css';

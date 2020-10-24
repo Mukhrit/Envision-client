@@ -3,25 +3,15 @@ import '../css/home.css';
 import './AboutSection';
 import About from './AboutSection';
 import Features from './Features';
-import firebase from 'firebase';
-import {auth,provider} from '../firebase';
+
+
 import { Button } from "reactstrap";
 export class Home extends Component {
   constructor(props) {
     super(props);
-    this.signin = this.signin.bind(this);
   }
 
-  signin() {
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        console.log(result.additionalUserInfo.profile);
-      })
-      .catch((error) => alert(error.message));
-
-
-  }
+  
   render() {
     return (
       <div className="home_div">
@@ -93,9 +83,9 @@ export class Home extends Component {
             </g>
           </svg>
         </section>
-        {/* <Button type="submit" onClick={this.signin}>
+        <Button type="submit" onClick={this.signin}>
           Google
-        </Button> */}
+        </Button>
         <About />
         <Features />
       </div>

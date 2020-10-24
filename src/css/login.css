@@ -1,0 +1,22 @@
+.login-btn-nav{
+    background-color: #3acabb;
+    border: none;
+}
+.login-btn-nav:hover{
+     background-color: #3acabb;
+    border: none;
+    box-shadow:  0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+    transform: translateY(5%);
+}
+.login-btn-nav:active{
+  background-color: #3acabb;
+    border: none;
+}
+.login-btn-nav::before{
+  background-color: #3acabb;
+    border: none;
+}
+.login-btn-nav:focus{
+  background-color: #3acabb;
+    border: none;
+}

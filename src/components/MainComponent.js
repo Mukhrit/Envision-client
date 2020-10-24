@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter, Switch, Redirect, Route } from "react-router-dom";
-import { loginUser, logoutUser } from "../redux/ActionCreater";
+import { loginUser, logoutUser,filldetailsUser } from "../redux/ActionCreater";
 import { connect } from "react-redux";
 import Header from "./HeaderComponent";
 import Home from "./HomeComponent";
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (user) => dispatch(loginUser(user)),
   logoutUser: () => dispatch(logoutUser()),
+  filldetailsUser:(user,isUsername)=>dispatch(filldetailsUser(user,isUsername))
 });
 class Main extends Component {
   render() {
@@ -24,28 +25,27 @@ class Main extends Component {
     };
    
      const PrivateRouteHome = ({ component: Component, ...rest }) => (
-      <Route
-        {...rest}
-        render={(props) =>
-          this.props.auth.isUsername ||
-          this.props.auth.isAuthenticated === false ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/filldetails",
-                state: { from: props.location },
-              }}
-            />
-          )
-        }
-      />
-    );
+       <Route
+         {...rest}
+         render={(props) =>
+           this.props.auth.isAuthenticated === false ? (
+             <Component {...props} />
+           ) : (
+             <Redirect
+               to={{
+                 pathname: "/filldetails",
+                 state: { from: props.location },
+               }}
+             />
+           )
+         }
+       />
+     );
     const PrivateRouteFilldetails = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
         render={(props) =>
-          this.props.auth.isAuthenticated === true &&  this.props.auth.isUsername===false? (
+       this.props.auth.isAuthenticated===true && !this.props.auth.user.username? (
             <Component {...props} />
           ) : (
             <Redirect
@@ -80,8 +80,14 @@ class Main extends Component {
               />
             )}
           />
-          <PrivateRouteHome path="/home" component={() => <Home />} />
-          <PrivateRouteFilldetails path="/filldetails" component={() => <Filldetails auth={this.props.auth}/>} />
+          <PrivateRouteHome
+            path="/home"
+            component={() => <Home loginUser={this.props.loginUser} />}
+          />
+          <PrivateRouteFilldetails
+            path="/filldetails"
+            component={() => <Filldetails auth={this.props.auth} filldetailsUser={this.props.filldetailsUser}/>}
+          />
           <Route path="/loginload" component={Loginload} />
           <Redirect to="/home" />
         </Switch>

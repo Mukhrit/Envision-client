@@ -1,6 +1,9 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import GoogleLogin from 'react-google-login';
+import '../css/login.css';
+import { auth, provider } from "../firebase";
 
 class LoginModal extends React.Component {
   constructor(props) {
@@ -8,9 +11,10 @@ class LoginModal extends React.Component {
     this.state = {
       modal: false,
     };
-
+    this.login = this.login.bind(this);
     this.toggle = this.toggle.bind(this);
-    this.logout=this.logout.bind(this);
+    this.logout = this.logout.bind(this);
+    this.signin = this.signin.bind(this);
   }
 
   toggle() {
@@ -18,22 +22,28 @@ class LoginModal extends React.Component {
       modal: !this.state.modal,
     });
   }
-  logout(){
+  logout() {
     this.props.logoutUser();
     this.toggle();
   }
-
+  login() {
+    this.toggle();
+  }
+  signin() {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result.additionalUserInfo.profile);
+        this.props.loginUser(result.additionalUserInfo.profile);
+      })
+      .catch((error) => alert(error.message));
+      this.toggle()
+  }
   render() {
-    const responseGoogle = (response) => {
-      var res = response.profileObj;
-      console.log(res);
-      this.props.loginUser(res);
-      this.toggle();
-    };
     return (
       <div>
-        <Button color='danger' onClick={this.toggle}>
-          {this.props.buttonLabel}
+        <Button className="login-btn-nav" onClick={this.toggle}>
+          <span>Login/Signup</span>
         </Button>
         <Modal
           isOpen={this.state.modal}
@@ -41,25 +51,30 @@ class LoginModal extends React.Component {
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>Lets Kick In!</ModalHeader>
-          {this.props.auth.isAuthenticated === false? (
-            <ModalBody style={{ marginLeft: '145px' }}>
-              <GoogleLogin
-                clientId='251356479099-8nu01f24fennvd2htamjmf541br3tedm.apps.googleusercontent.com'
-                buttonText='Login with Google'
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-              ></GoogleLogin>
-            </ModalBody>
-          ) : (
-            <ModalBody style={{ marginLeft: '145px' }}>
-              <Button color='danger' onClick={() => this.logout()}>
-                Logout
+          <ModalBody>
+            {/* <div className="row">
+                <div >
+                  <Button className=""
+                    href="#"
+                  >
+                    <img src="https://img.icons8.com/color/16/000000/google-logo.png" className="img-fluid"/>
+                    <span style={{ color: "black" }}>Signup Usin</span>
+                  </Button>
+                </div>
+              </div> */}
+            <div className="d-flex justify-content-center">
+              <Button outline className="button-google " onClick={this.signin}>
+                <img
+                  src="https://img.icons8.com/color/16/000000/google-logo.png"
+                  className="img-fluid"
+                ></img>{" "}
+                Sign in /Login via Google
               </Button>
-            </ModalBody>
-          )}
+            </div>
+          </ModalBody>
 
           <ModalFooter>
-            <Button color='secondary' onClick={this.toggle}>
+            <Button color="" onClick={this.toggle}>
               Close
             </Button>
           </ModalFooter>

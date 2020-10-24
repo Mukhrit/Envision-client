@@ -52,6 +52,12 @@ export const Auth = (
         token: "",
         user: null,
       };
+    case ActionTypes.FILLDETAILS_SUCCESS:
+      return {
+        ...state,
+        isUsername: action.isUsername,
+        user: action.creds
+      };
     default:
       return state;
   }
