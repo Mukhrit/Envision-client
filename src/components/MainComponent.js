@@ -11,7 +11,8 @@ import LoginModal from './LoginModal';
 import DashCard from './DashCard';
 import Card3 from './cards3';
 import Allcontest from './Allcontest';
-
+import GraphMain from './GraphMain';
+import DashboardComponent from './DashboardComponent';
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
@@ -64,6 +65,10 @@ class Main extends Component {
         }
       />
     );
+    const dashboardshow = ({ match }) => {
+      let envision_handle = match.params.envision_handle;
+      return <DashboardComponent envision_handle={envision_handle} />;
+    };
 
     return (
       <div>
@@ -91,16 +96,11 @@ class Main extends Component {
             path='/home'
             component={() => <Home loginUser={this.props.loginUser} />}
           />
-          <PrivateRouteFilldetails
-            path='/filldetails'
-            component={() => (
-              <Filldetails
-                auth={this.props.auth}
-                filldetailsUser={this.props.filldetailsUser}
-              />
-            )}
-          />
+          <PrivateRouteFilldetails auth={this.props.auth} />
+
           <Route path='/loginload' component={Loginload} />
+          <Route path='/dashboard/:envision_handle' component={dashboardshow} />
+          <Route path='/graph' component={() => <GraphMain />} />
           <Redirect to='/home' />
         </Switch>
         {/* <Footer /> */}
@@ -108,4 +108,5 @@ class Main extends Component {
     );
   }
 }
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

@@ -1,0 +1,11 @@
+.graph-main{
+    height: 500px;
+
+}
+.dashboard-header{
+    height: 67px;
+    background-color: #17252a;
+}
+.dashboard-graph-main{
+    margin: 10px;
+}
