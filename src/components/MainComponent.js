@@ -8,6 +8,8 @@ import Filldetails from "./FilldetailComponent";
 import Footer from "./FooterComponent";
 import Login from "./Loginloader";
 import LoginModal from "./LoginModal";
+import GraphMain from "./GraphMain";
+import DashboardComponent from "./DashboardComponent";
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
@@ -58,6 +60,12 @@ class Main extends Component {
         }
       />
     );
+    const dashboardshow=({match})=>{
+      let envision_handle=match.params.envision_handle;
+      return(
+        <DashboardComponent envision_handle={envision_handle}/>
+      );
+    }
 
     return (
       <div>
@@ -69,7 +77,7 @@ class Main extends Component {
         <Switch>
           <Route
             exact
-            path='/loginmodal'
+            path="/loginmodal"
             component={() => (
               <LoginModal
                 loginUser={this.props.loginUser}
@@ -84,9 +92,16 @@ class Main extends Component {
           />
           <PrivateRouteFilldetails
             path="/filldetails"
-            component={() => <Filldetails auth={this.props.auth} filldetailsUser={this.props.filldetailsUser}/>}
+            component={() => (
+              <Filldetails
+                auth={this.props.auth}
+                filldetailsUser={this.props.filldetailsUser}
+              />
+            )}
           />
           <Route path="/loginload" component={Loginload} />
+          <Route path="/dashboard/:envision_handle" component={dashboardshow} />
+          <Route path="/graph" component={() => <GraphMain />} />
           <Redirect to="/home" />
         </Switch>
         {/* <Footer /> */}
@@ -94,4 +109,5 @@ class Main extends Component {
     );
   }
 }
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
