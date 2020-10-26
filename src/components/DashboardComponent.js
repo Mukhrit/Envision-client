@@ -21,14 +21,24 @@ class DashboardComponent extends React.Component {
   }
   render() {
       if (this.state.user) {
-          return (
-            <div>
-              <div className="dashboard-header"></div>
-              <div className="dashboard-graph-main">
-                <GraphMain />
+          let codeforces,codechef,atcoder;
+          if (this.state.user.codechef_id){
+            codechef = this.state.user.codechef_id;
+          }
+          if (this.state.user.codeforces_id) {
+            codeforces = this.state.user.codeforces_id;
+          }
+           if (this.state.user.atcoder_id) {
+            atcoder = this.state.user.atcoder_id;
+          }
+            return (
+              <div>
+                <div className="dashboard-header"></div>
+                <div className="dashboard-graph-main">
+                  <GraphMain codechef={codechef} codeforces={codeforces} atcoder={atcoder}/>
+                </div>
               </div>
-            </div>
-          );
+            );
       }else{
           return (<div>Loading</div>);
       }
