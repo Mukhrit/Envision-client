@@ -3,15 +3,9 @@ import classNames from 'classnames';
 import { Line, Bar } from 'react-chartjs-2';
 import {
   Button,
-  ButtonGroup,
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
   Label,
   FormGroup,
   Input,
@@ -25,6 +19,52 @@ class Allcontest extends React.Component {
   render() {
     console.log(this.props);
     const contests = this.props.contests;
+    console.log(contests);
+    function formatDate(date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
+
+    contests.sort((a, b) => {
+      //end dates
+      var mydate1 = formatDate(a.time.end.substring(0, a.time.end.length - 9));
+      var mydate2 = formatDate(b.time.end.substring(0, b.time.end.length - 9));
+      var compdate1 = mydate1 + a.time.end.substring(a.time.end.length - 9);
+      var compdate2 = mydate2 + b.time.end.substring(b.time.end.length - 9);
+      var date1Updated = new Date(compdate1.replace(/-/g, '/'));
+      var date2Updated = new Date(compdate2.replace(/-/g, '/'));
+
+      //start dates
+      var mydate1s = formatDate(
+        a.time.start.substring(0, a.time.start.length - 9)
+      );
+      var mydate2s = formatDate(
+        b.time.start.substring(0, b.time.start.length - 9)
+      );
+      var compdate1s =
+        mydate1s + a.time.start.substring(a.time.start.length - 9);
+      var compdate2s =
+        mydate2s + b.time.start.substring(b.time.start.length - 9);
+      var date1Updateds = new Date(compdate1s.replace(/-/g, '/'));
+      var date2Updateds = new Date(compdate2s.replace(/-/g, '/'));
+      console.log(date1Updated);
+      console.log(date2Updated);
+      console.log(date1Updated < date2Updated);
+
+      if (date1Updated === date2Updated) return date1Updateds - date2Updateds;
+      return date1Updated - date2Updated;
+    });
+
+    console.log('sorted');
+    console.log(contests);
+
     return (
       <Row>
         <Col lg='6' md='12'>
@@ -73,6 +113,13 @@ class Allcontest extends React.Component {
                                       contestobj.location.length - 4
                                     )
                                     .slice(1)}
+                              </p>
+                              <p>
+                                <span>
+                                  Start Time : {contestobj.time.start}
+                                  <br />
+                                  End Time : {contestobj.time.end}
+                                </span>
                               </p>
                             </td>
                             <td className='td-actions text-right'>

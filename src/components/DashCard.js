@@ -13,7 +13,7 @@ class DashCard extends React.Component {
     const user = this.props.user;
 
     console.log(user);
-
+    //latest ratings ups and downs
     let diffchef =
       parseInt(
         user.codechef_id.allcontests[user.codechef_id.allcontests.length - 1]
@@ -33,7 +33,7 @@ class DashCard extends React.Component {
       user.atcoder_id.recentSubmission[
         user.atcoder_id.recentSubmission.length - 1
       ].OldRating;
-
+    //colors for positive and negative
     let chefcol = '#7CFC00';
     let forcecol = '#7CFC00';
     let atcodercol = '#7CFC00';
@@ -53,15 +53,95 @@ class DashCard extends React.Component {
     } else {
       atcodercol = '#FF3A3A';
     }
+    //rating colors
+    let codechefstars = user.codechef_id.star,
+      codeforcesstage = user.codeforces_id.rating_stage;
+
+    let atcoderranking = user.atcoder_id.data[1].substring(6);
+
+    let codechefrating = user.codechef_id.rating;
+
+    let codeforcesrating = user.codeforces_id.rating;
+
+    let atcodercolor = '';
+    let atcodercolorname = '';
+
+    if (atcoderranking >= 0 && atcoderranking <= 399) {
+      atcodercolor = 'gray';
+      atcodercolorname = 'Gray';
+    } else if (atcoderranking >= 400 && atcoderranking <= 799) {
+      atcodercolor = 'brown';
+      atcodercolorname = 'Brown';
+    } else if (atcoderranking >= 800 && atcoderranking <= 1199) {
+      atcodercolor = 'limegreen';
+      atcodercolorname = 'Green';
+    } else if (atcoderranking >= 1200 && atcoderranking <= 1599) {
+      atcodercolor = 'cyan';
+      atcodercolorname = 'Cyan';
+    } else if (atcoderranking >= 1600 && atcoderranking <= 1999) {
+      atcodercolor = 'blue';
+      atcodercolorname = 'Blue';
+    } else if (atcoderranking >= 2000 && atcoderranking <= 2399) {
+      atcodercolor = 'yellow';
+      atcodercolorname = 'Yellow';
+    } else if (atcoderranking >= 2400 && atcoderranking <= 2799) {
+      atcodercolor = 'orange';
+      atcodercolorname = 'Orange';
+    } else if (atcoderranking >= 2800 && atcoderranking <= 3199) {
+      atcodercolor = 'red';
+      atcodercolorname = 'Red';
+    }
+
+    let codechefcolor = '';
+
+    if (codechefrating >= 0 && codechefrating <= 1399) {
+      codechefcolor = 'rgb(102, 102, 102)';
+    } else if (codechefrating >= 1400 && codechefrating <= 1599) {
+      codechefcolor = 'rgb(30, 125, 34)';
+    } else if (codechefrating >= 1600 && codechefrating <= 1799) {
+      codechefcolor = 'rgb(76, 127, 229)';
+    } else if (codechefrating >= 1800 && codechefrating <= 1999) {
+      codechefcolor = 'rgb(129, 91, 140)';
+    } else if (codechefrating >= 2000 && codechefrating <= 2199) {
+      codechefcolor = 'rgb(255, 216, 25)';
+    } else if (codechefrating >= 2200 && codechefrating <= 2499) {
+      codechefcolor = 'rgb(255, 152, 25)';
+    } else if (codechefrating >= 2500) {
+      codechefcolor = 'rgb(233, 26, 52)';
+    }
+
+    let codeforcescolor = '';
+
+    if (codeforcesrating <= 1199) {
+      codeforcescolor = 'gray';
+    } else if (codeforcesrating >= 1200 && codeforcesrating <= 1399) {
+      codeforcescolor = '	#32CD32';
+    } else if (codeforcesrating >= 1400 && codeforcesrating <= 1599) {
+      codeforcescolor = 'cyan';
+    } else if (codeforcesrating >= 1600 && codeforcesrating <= 1899) {
+      codeforcescolor = 'blue';
+    } else if (codeforcesrating >= 1900 && codeforcesrating <= 2199) {
+      codeforcescolor = 'violet';
+    } else if (codeforcesrating >= 2200 && codeforcesrating <= 2299) {
+      codeforcescolor = 'orange';
+    } else if (codeforcescolor >= 2300 && codeforcesrating <= 2399) {
+      codeforcescolor = 'orange';
+    } else if (codeforcescolor >= 2400 && codeforcesrating <= 2599) {
+      codeforcescolor = 'red';
+    } else if (codeforcescolor >= 2600 && codeforcesrating <= 2899) {
+      codeforcescolor = 'red';
+    } else if (codeforcescolor >= 2900) {
+      codeforcescolor = 'red';
+    }
 
     return (
       <div className='cardparent'>
-        <div className='row'>
-          <div class='col-md-6 col-lg-3'>
+        <div className='row justify-content-center'>
+          <div class='col-lg-3'>
             <div class='card-stats card'>
               <div class='card-body'>
                 <div class='row'>
-                  <div class='col-5'>
+                  <div class='col-12'>
                     <div class='info-icon text-center icon-warning'>
                       <i class='tim-icons icon-chat-33 '>
                         {' '}
@@ -73,17 +153,33 @@ class DashCard extends React.Component {
                       </i>
                     </div>
                   </div>
-                  <div class='col-7'>
+                </div>
+                <div className='row' style={{ justifyContent: 'right' }}>
+                  <div class='col-12 '>
                     <div class='numbers'>
+                      <h3 class='card-title'>
+                        Rating :{' '}
+                        <span
+                          style={{
+                            color: 'white',
+                            fontSize: '30px',
+                            backgroundColor: codechefcolor,
+                            padding: '1px',
+                            fontWeight: 'bolder',
+                            marginLeft: '10px',
+                          }}
+                        >
+                          {user.codechef_id.star}
+                        </span>
+                        <span> {user.codechef_id.rating}</span>
+                      </h3>
+
                       <p
                         class='card-category'
                         style={{ fontSize: '27px', color: chefcol }}
                       >
                         {diffchef}
                       </p>
-                      <h3 class='card-title'>
-                        Rating : {user.codechef_id.rating}
-                      </h3>
                     </div>
                   </div>
                 </div>
@@ -102,11 +198,11 @@ class DashCard extends React.Component {
               </div>
             </div>
           </div>
-          <div class='col-md-6 col-lg-3'>
+          <div class='col-lg-3'>
             <div class='card-stats card'>
               <div class='card-body'>
                 <div class='row'>
-                  <div class='col-5'>
+                  <div class='col-12'>
                     <div class='info-icon text-center icon-warning'>
                       <i class='tim-icons icon-chat-33'>
                         <span
@@ -117,17 +213,31 @@ class DashCard extends React.Component {
                       </i>
                     </div>
                   </div>
-                  <div class='col-7'>
+                </div>
+                <div className='row' style={{ justifyContent: 'right' }}>
+                  <div class='col-12'>
                     <div class='numbers'>
+                      <h3 class='card-title'>
+                        Rating :{' '}
+                        <span
+                          style={{
+                            marginRight: '10px',
+                            color: codeforcescolor,
+                            fontWeight: 'bolder',
+                            padding: '5px',
+                          }}
+                        >
+                          {user.codeforces_id.rating_stage}
+                        </span>
+                        {user.codeforces_id.rating}
+                      </h3>
+
                       <p
                         class='card-category'
                         style={{ fontSize: '27px', color: forcecol }}
                       >
                         {diffcf}
                       </p>
-                      <h3 class='card-title'>
-                        Rating : {user.codeforces_id.rating}
-                      </h3>
                     </div>
                   </div>
                 </div>
@@ -146,11 +256,11 @@ class DashCard extends React.Component {
               </div>
             </div>
           </div>
-          <div class='col-md-6 col-lg-3'>
+          <div class='col-lg-3'>
             <div class='card-stats card'>
               <div class='card-body'>
                 <div class='row'>
-                  <div class='col-5'>
+                  <div class='col-12'>
                     <div class='info-icon text-center icon-warning'>
                       <i class='tim-icons icon-chat-33'>
                         <span
@@ -161,17 +271,31 @@ class DashCard extends React.Component {
                       </i>
                     </div>
                   </div>
-                  <div class='col-7'>
+                </div>
+                <div className='row' style={{ justifyContent: 'right' }}>
+                  <div class='col-12'>
                     <div class='numbers'>
+                      <h3 class='card-title'>
+                        Rating :
+                        <span
+                          style={{
+                            marginLeft: '10px',
+                            color: atcodercolor,
+                            fontWeight: 'bolder',
+                            padding: '5px',
+                          }}
+                        >
+                          {atcodercolorname}
+                        </span>
+                        {user.atcoder_id.data[1].substring(6)}
+                      </h3>
+
                       <p
                         class='card-category'
                         style={{ fontSize: '27px', color: atcodercol }}
                       >
                         {atcoderdiff}
                       </p>
-                      <h3 class='card-title'>
-                        Rating :{user.atcoder_id.data[1].substring(6)}
-                      </h3>
                     </div>
                   </div>
                 </div>

@@ -27,7 +27,7 @@ class DashboardComponent extends React.Component {
       .catch((err) => console.log(err));
   }
   render() {
-    if (this.state.user) {
+    if (this.state.user && this.state.Allcontest) {
       let codeforces, codechef, atcoder;
       if (this.state.user.codechef_id) {
         codechef = this.state.user.codechef_id;
