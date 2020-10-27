@@ -1,0 +1,149 @@
+.cardparent {
+  .card {
+    background: #27293d;
+    border: 0;
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+
+    background-clip: initial;
+    border: 0.0625rem solid rgba(34, 42, 66, 0.05);
+    border-radius: 0.2857rem;
+  }
+  .card .card-body {
+    padding: 15px;
+  }
+  .card-body {
+    padding: 1.25rem;
+  }
+  .card-stats hr {
+    border-color: #2b3553;
+  }
+  .card-contributions hr,
+  .card-stats hr {
+    margin: 5px 15px;
+  }
+  hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .card-body {
+    flex: 1 1 auto;
+    padding: 1.5rem;
+  }
+  .card-stats .info-icon.icon-warning {
+    background: #ff8d72;
+    background-image: linear-gradient(
+      to bottom left,
+      #ff8d72,
+      #ff6491,
+      #ff8d72
+    );
+    background-size: 210% 210%;
+    background-position: 100% 0;
+  }
+  .card-stats .info-icon {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: #e14eca;
+    background-image: linear-gradient(
+      to bottom left,
+      #e14eca,
+      #ba54f5,
+      #e14eca
+    );
+    background-size: 210% 210%;
+    background-position: 100% 0;
+  }
+  .card-stats .info-icon i {
+    color: #fff;
+    font-size: 2.2em;
+    margin-top: 5px;
+  }
+  .tim-icons {
+    display: inline-block;
+    font: normal normal normal 1em/1 'Nucleo';
+    vertical-align: middle;
+
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card-stats .numbers {
+    text-align: right;
+  }
+  .card-stats .numbers .card-category {
+    margin-bottom: 0;
+    color: #9a9a9a;
+  }
+  .card-stats .numbers .card-title {
+    margin-top: 0;
+  }
+  .card .card-body .card-title {
+    color: #fff;
+    text-transform: inherit;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
+  .card .card-title {
+    margin-bottom: 0.75rem;
+  }
+  .card h1,
+  .card h2,
+  .card h3,
+  .card h4,
+  .card h5,
+  .card h6,
+  .card p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: hsla(0, 0%, 100%, 0.8);
+  }
+  .card-stats .card-footer {
+    padding: 0;
+  }
+  .card .card-footer {
+    background-color: initial;
+    border: 0;
+    padding: 15px;
+  }
+  .card-footer:last-child {
+    border-radius: 0 0 0.2232rem 0.2232rem;
+  }
+  .card-footer {
+    padding: 1.25rem 1.5rem;
+    background-color: #f6f9fc;
+    border-top: 0.0625rem solid rgba(34, 42, 66, 0.05);
+  }
+  .card-stats .stats {
+    color: hsla(0, 0%, 100%, 0.6);
+    margin: 10px 15px;
+    font-size: 0.9em;
+  }
+  .card .card-footer .stats i {
+    margin-right: 5px;
+    position: relative;
+  }
+  .tim-icons {
+    display: inline-block;
+    font: normal normal normal 1em/1 'Nucleo';
+    vertical-align: middle;
+
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
