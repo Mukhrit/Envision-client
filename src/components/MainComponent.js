@@ -89,6 +89,11 @@ class Main extends Component {
               />
             )}
           />
+          <Route
+            exact
+            path='/dashboard/:envision_handle'
+            component={dashboardshow}
+          />
           <Route exact path='/dashcard' component={() => <DashCard />} />
           <Route exact path='/allcontest' component={() => <Allcontest />} />
           <Route exact path='/card3' component={() => <Card3 />} />
@@ -99,7 +104,7 @@ class Main extends Component {
           <PrivateRouteFilldetails auth={this.props.auth} />
 
           <Route path='/loginload' component={Loginload} />
-          <Route path='/dashboard/:envision_handle' component={dashboardshow} />
+
           <Route path='/graph' component={() => <GraphMain />} />
           <Redirect to='/home' />
         </Switch>
