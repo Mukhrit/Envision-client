@@ -42,7 +42,7 @@ class LoginModal extends React.Component {
   render() {
     return (
       <div>
-        <Button className="login-btn-nav" onClick={this.toggle}>
+        <Button onClick={this.toggle}>
           <span>Login/Signup</span>
         </Button>
         <Modal
@@ -52,18 +52,8 @@ class LoginModal extends React.Component {
         >
           <ModalHeader toggle={this.toggle}>Lets Kick In!</ModalHeader>
           <ModalBody>
-            {/* <div className="row">
-                <div >
-                  <Button className=""
-                    href="#"
-                  >
-                    <img src="https://img.icons8.com/color/16/000000/google-logo.png" className="img-fluid"/>
-                    <span style={{ color: "black" }}>Signup Usin</span>
-                  </Button>
-                </div>
-              </div> */}
             <div className="d-flex justify-content-center">
-              <Button outline className="button-google " onClick={this.signin}>
+              <Button color="link" className="button-google " onClick={this.signin}>
                 <img
                   src="https://img.icons8.com/color/16/000000/google-logo.png"
                   className="img-fluid"
@@ -80,15 +70,6 @@ class LoginModal extends React.Component {
           </ModalFooter>
         </Modal>
       </div>
-    //   <Modal
-    //     open={open}
-    //     onClose={handleClose}
-    //     aria-labelledby='simple-modal-title'
-    //     aria-describedby='simple-modal-description'
-    //   >
-    //     {body}
-    //   </Modal>
-    // </div>
   );
 }
 }
