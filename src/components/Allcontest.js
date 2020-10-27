@@ -53,15 +53,26 @@ class Allcontest extends React.Component {
                             </td>
                             <td>
                               <p className='title'>
-                                {contestobj.title}
-                                <br />
-                                Location :
-                                <a href={contestobj.desc.substring(5)}>
-                                  {contestobj.desc.substring(5)}
+                                <a
+                                  href={contestobj.desc.substring(5)}
+                                  style={{
+                                    textDecoration: 'none',
+                                  }}
+                                >
+                                  {contestobj.title}
                                 </a>
                               </p>
-                              <p className='text-muted'>
-                                {contestobj.location}
+                              <p>
+                                {contestobj.location
+                                  .substring(0, contestobj.location.length - 4)
+                                  .charAt(0)
+                                  .toUpperCase() +
+                                  contestobj.location
+                                    .substring(
+                                      0,
+                                      contestobj.location.length - 4
+                                    )
+                                    .slice(1)}
                               </p>
                             </td>
                             <td className='td-actions text-right'>

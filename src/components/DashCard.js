@@ -10,8 +10,10 @@ class DashCard extends React.Component {
   }
 
   render() {
-    console.log('here');
     const user = this.props.user;
+
+    console.log(user);
+
     let diffchef =
       parseInt(
         user.codechef_id.allcontests[user.codechef_id.allcontests.length - 1]
@@ -21,16 +23,37 @@ class DashCard extends React.Component {
         user.codechef_id.allcontests[user.codechef_id.allcontests.length - 2]
           .rating
       );
+
     let diffcf = user.codeforces_id.allcontests[0][4];
 
-    console.log(diffchef);
+    let atcoderdiff =
+      user.atcoder_id.recentSubmission[
+        user.atcoder_id.recentSubmission.length - 1
+      ].NewRating -
+      user.atcoder_id.recentSubmission[
+        user.atcoder_id.recentSubmission.length - 1
+      ].OldRating;
+
+    let chefcol = '#7CFC00';
+    let forcecol = '#7CFC00';
+    let atcodercol = '#7CFC00';
+
     if (diffchef >= 0) {
       diffchef = '+' + String(diffchef);
     } else {
-      diffchef = '-' + String(diffchef);
+      chefcol = '#FF3A3A';
     }
 
-    console.log(user);
+    if (diffcf < 0) {
+      forcecol = '#FF3A3A';
+    }
+
+    if (atcoderdiff >= 0) {
+      atcoderdiff = '+' + String(atcoderdiff);
+    } else {
+      atcodercol = '#FF3A3A';
+    }
+
     return (
       <div className='cardparent'>
         <div className='row'>
@@ -52,7 +75,12 @@ class DashCard extends React.Component {
                   </div>
                   <div class='col-7'>
                     <div class='numbers'>
-                      <p class='card-category'>{diffchef}</p>
+                      <p
+                        class='card-category'
+                        style={{ fontSize: '27px', color: chefcol }}
+                      >
+                        {diffchef}
+                      </p>
                       <h3 class='card-title'>
                         Rating : {user.codechef_id.rating}
                       </h3>
@@ -91,7 +119,12 @@ class DashCard extends React.Component {
                   </div>
                   <div class='col-7'>
                     <div class='numbers'>
-                      <p class='card-category'>{diffcf}</p>
+                      <p
+                        class='card-category'
+                        style={{ fontSize: '27px', color: forcecol }}
+                      >
+                        {diffcf}
+                      </p>
                       <h3 class='card-title'>
                         Rating : {user.codeforces_id.rating}
                       </h3>
@@ -130,8 +163,15 @@ class DashCard extends React.Component {
                   </div>
                   <div class='col-7'>
                     <div class='numbers'>
-                      <p class='card-category'>Number</p>
-                      <h3 class='card-title'>150GB</h3>
+                      <p
+                        class='card-category'
+                        style={{ fontSize: '27px', color: atcodercol }}
+                      >
+                        {atcoderdiff}
+                      </p>
+                      <h3 class='card-title'>
+                        Rating :{user.atcoder_id.data[1].substring(6)}
+                      </h3>
                     </div>
                   </div>
                 </div>

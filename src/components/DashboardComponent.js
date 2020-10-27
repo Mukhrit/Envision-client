@@ -5,6 +5,7 @@ import GraphMain from './GraphMain';
 import DashCard from './DashCard';
 import { Dashboard } from '@material-ui/icons';
 import Allcontest from './Allcontest';
+import Card3 from './cards3';
 
 class DashboardComponent extends React.Component {
   constructor(props) {
@@ -40,11 +41,10 @@ class DashboardComponent extends React.Component {
       return (
         <div>
           <div className='dashboard-header'></div>
-          <div className='dashboard-graph-main'>
-            <GraphMain />
-          </div>
+          <div className='dashboard-graph-main'></div>
           <DashCard user={this.state.user} />
           <Allcontest contests={this.state.Allcontest} />
+          <Card3 />
         </div>
       );
     } else {
