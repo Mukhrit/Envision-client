@@ -20,6 +20,7 @@
 // #############################
 
 // chartExample1 and chartExample2 options
+
 let chart1_2_options = {
   maintainAspectRatio: false,
   legend: {
@@ -265,10 +266,10 @@ let chartExample3 = {
     gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
     return {
-      labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+      labels: ['Codechef', 'Codeforces', 'Atcoder'],
       datasets: [
         {
-          label: 'Countries',
+          label: 'Competitive Programming Websites',
           fill: true,
           backgroundColor: gradientStroke,
           hoverBackgroundColor: gradientStroke,

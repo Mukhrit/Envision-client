@@ -10,13 +10,19 @@ import Dashboardavatar from './Dashboardavatar';
 class DashboardComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      err:false
+    };
   }
   componentDidMount() {
     Axios.get(baseUrl + 'users/' + this.props.envision_handle)
       .then((res) => res.data)
       .then((res) => {
+        if(res[0])
         this.setState({ user: res[0] });
+        else{
+          this.setState({err:true})
+        }
         console.log(this.state);
       })
       .catch((err) => console.log(err));
@@ -49,8 +55,9 @@ class DashboardComponent extends React.Component {
               codeforces={codeforces}
               atcoder={atcoder}
             />
+            <Card3 user={this.state.user} />
+            {/* <DashCard user={this.state.user} /> */}
             <Allcontest contests={this.state.Allcontest} />
-            <Card3 />
           </div>
         </div>
       );
@@ -60,8 +67,12 @@ class DashboardComponent extends React.Component {
           <div className="dashboard-header"></div>
           <div className="dashboard_loader">
             <div className="dashboard_loader_spin">
-              <i class="fa fa-4x fa-spinner fa-spin "></i>
-              
+
+              {!this.state.err ? (
+                <i class="fa fa-4x fa-spinner fa-spin "></i>
+              ) : (
+                <h4>User not found</h4>
+              )}
             </div>
           </div>
         </div>

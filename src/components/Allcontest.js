@@ -17,9 +17,8 @@ import {
 
 class Allcontest extends React.Component {
   render() {
-    console.log(this.props);
     const contests = this.props.contests;
-    console.log(contests);
+
     function formatDate(date) {
       var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -54,16 +53,10 @@ class Allcontest extends React.Component {
         mydate2s + b.time.start.substring(b.time.start.length - 9);
       var date1Updateds = new Date(compdate1s.replace(/-/g, '/'));
       var date2Updateds = new Date(compdate2s.replace(/-/g, '/'));
-      console.log(date1Updated);
-      console.log(date2Updated);
-      console.log(date1Updated < date2Updated);
 
       if (date1Updated === date2Updated) return date1Updateds - date2Updateds;
       return date1Updated - date2Updated;
     });
-
-    console.log('sorted');
-    console.log(contests);
 
     return (
       <Row>
@@ -116,9 +109,9 @@ class Allcontest extends React.Component {
                               </p>
                               <p>
                                 <span>
-                                  Start Time : {contestobj.time.start}
+                                  Start Time : {contestobj.time.start} (UTC)
                                   <br />
-                                  End Time : {contestobj.time.end}
+                                  End Time : {contestobj.time.end} (UTC)
                                 </span>
                               </p>
                             </td>
