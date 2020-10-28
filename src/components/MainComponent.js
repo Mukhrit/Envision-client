@@ -30,16 +30,16 @@ class Main extends Component {
       return <Login loginUser={this.props.loginUser} auth={this.props.auth} />;
     };
 
-    const PrivateRouteHome = ({ component: Component, ...rest }) => (
+    const PrivateRouteDashboard = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
         render={(props) =>
-          this.props.auth.isAuthenticated === false ? (
+          this.props.auth.isAuthenticated === true && this.props.auth.user.username? (
             <Component {...props} />
           ) : (
             <Redirect
               to={{
-                pathname: '/filldetails',
+                pathname: "/filldetails",
                 state: { from: props.location },
               }}
             />
@@ -54,10 +54,18 @@ class Main extends Component {
           this.props.auth.isAuthenticated === true &&
           !this.props.auth.user.username ? (
             <Component {...props} />
+          ) : this.props.auth.isAuthenticated === true &&
+            this.props.auth.user.username ? (
+            <Redirect
+              to={{
+                pathname: `/dashboard/${this.props.auth.user.username}`,
+                state: { from: props.location },
+              }}
+            />
           ) : (
             <Redirect
               to={{
-                pathname: '/home',
+                pathname: `/home`,
                 state: { from: props.location },
               }}
             />
@@ -69,48 +77,116 @@ class Main extends Component {
       let envision_handle = match.params.envision_handle;
       return <DashboardComponent envision_handle={envision_handle} />;
     };
-
-    return (
-      <div>
-        {/* <Header
-          loginUser={this.props.loginUser}
-          logoutUser={this.props.logoutUser}
-          auth={this.props.auth}
-        /> */}
-        <Switch>
-          <Route
-            exact
-            path='/loginmodal'
-            component={() => (
-              <LoginModal
-                loginUser={this.props.loginUser}
-                logoutUser={this.props.logoutUser}
-                auth={this.props.auth}
+    if(this.props.auth.isAuthenticated===false){
+      return (
+        <div>
+          <Header
+            loginUser={this.props.loginUser}
+            logoutUser={this.props.logoutUser}
+            auth={this.props.auth}
+          />
+          <Switch>
+            <Route
+              path="/home"
+              component={() => (
+                <Home auth={this.props.auth} loginUser={this.props.loginUser} />
+              )}
+            />
+            <Route
+              path="/dashboard/:envision_handle"
+              component={dashboardshow}
+            />
+            <Redirect to="/home" />
+          </Switch>
+        </div>
+      );
+    }
+    else if (this.props.auth.isAuthenticated === true && !this.props.auth.user.username) {
+        return (
+          <div>
+            <Header
+              loginUser={this.props.loginUser}
+              logoutUser={this.props.logoutUser}
+              auth={this.props.auth}
+            />
+            <Switch>
+              <Route
+                exact
+                path="/filldetails"
+                component={() => <Filldetails auth={this.props.auth}  loginUser={this.props.loginUser}/>}
               />
-            )}
-          />
-          <Route
-            exact
-            path='/dashboard/:envision_handle'
-            component={dashboardshow}
-          />
-          <Route exact path='/dashcard' component={() => <DashCard />} />
-          <Route exact path='/allcontest' component={() => <Allcontest />} />
-          <Route exact path='/card3' component={() => <Card3 />} />
-          <PrivateRouteHome
-            path='/home'
-            component={() => <Home loginUser={this.props.loginUser} />}
-          />
-          <PrivateRouteFilldetails auth={this.props.auth} />
+              <Redirect to="/filldetails" />
+            </Switch>
+          </div>
+        );
+      }else{
+         return (
+           <div>
+             <Header
+               loginUser={this.props.loginUser}
+               logoutUser={this.props.logoutUser}
+               auth={this.props.auth}
+             />
+             <Switch>
+               <Route
+                 path="/home"
+                 component={() => (
+                   <Home
+                     auth={this.props.auth}
+                     loginUser={this.props.loginUser}
+                   />
+                 )}
+               />
+               <Route
+                 path="/dashboard/:envision_handle"
+                 component={dashboardshow}
+               />
+               <Redirect to="/home" />
+             </Switch>
+           </div>
+         );
+      }
 
-          <Route path='/loginload' component={Loginload} />
+    // return (
+    //   <div>
+    //     <Header
+    //       loginUser={this.props.loginUser}
+    //       logoutUser={this.props.logoutUser}
+    //       auth={this.props.auth}
+    //     />
+    //     <Switch>
+    //       <Route
+    //         exact
+    //         path='/loginmodal'
+    //         component={() => (
+    //           <LoginModal
+    //             loginUser={this.props.loginUser}
+    //             logoutUser={this.props.logoutUser}
+    //             auth={this.props.auth}
+    //           />
+    //         )}
+    //       />
+    //       < Route
+    //         path='/dashboard/:envision_handle'
+    //         component={dashboardshow}
+    //       />
+    //       <Route exact path='/dashcard' component={() => <DashCard />} />
+    //       <Route exact path='/allcontest' component={() => <Allcontest />} />
+    //       <Route exact path='/card3' component={() => <Card3 />} />
+    //       <Route
+    //         path='/home'
+    //         component={() => <Home auth={this.props.auth} />}
+    //       />
+    //       <PrivateRouteFilldetails exact path='/filldetails' component={()=><Filldetails auth={this.props.auth}/>} />
 
-          <Route path='/graph' component={() => <GraphMain />} />
-          <Redirect to='/home' />
-        </Switch>
-        {/* <Footer /> */}
-      </div>
-    );
+    //       <Route path='/loginload' component={Loginload} />
+
+    //       <Route path='/graph' component={() => <GraphMain />} />
+    //       <Redirect to='/home' />
+    //     </Switch>
+    //     {/* <Footer /> */}
+    //   </div>
+    // );
   }
 }
 

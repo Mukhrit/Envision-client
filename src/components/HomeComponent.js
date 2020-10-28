@@ -3,15 +3,41 @@ import '../css/home.css';
 import './AboutSection';
 import About from './AboutSection';
 import Features from './Features';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { auth, provider } from "../firebase";
+import { Link } from 'react-router-dom';
 
-
-import { Button } from "reactstrap";
 export class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modal: false,
+    };
+    this.login = this.login.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.signin = this.signin.bind(this);
   }
 
-  
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
+
+  login() {
+    this.toggle();
+  }
+  signin() {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result.additionalUserInfo.profile);
+        this.props.loginUser(result.additionalUserInfo.profile);
+      })
+      .catch((error) => alert(error.message));
+    this.toggle();
+  }
+
   render() {
     return (
       <div className="home_div">
@@ -25,13 +51,59 @@ export class Home extends Component {
                     <span>Envision</span>
                   </h1>
                   <h2>
-                    We are team of talanted designers making websites with
-                    Bootstrap
+                    We are here to showcase your talent and anaylze you cp with
+                    your friends
                   </h2>
-                  <div class="text-center text-lg-left">
-                    <a href="#about" class="btn-get-started scrollto">
-                      Get Started
-                    </a>
+                  {this.props.auth.isAuthenticated === false ? (
+                    <div class="text-center text-lg-left">
+                      <a onClick={this.toggle} class="btn-get-started btn">
+                        Get Started
+                      </a>
+                    </div>
+                  ) : (
+                    <div class="text-center text-lg-left">
+                      <Link
+                        to={(location) =>
+                          `dashboard/${this.props.auth.user.username}`
+                        }
+                        class="btn-get-started btn"
+                      >
+                        Your Profile
+                      </Link>
+                    </div>
+                  )}
+                  <div>
+                    <Modal
+                      isOpen={this.state.modal}
+                      toggle={this.toggle}
+                      className={this.props.className}
+                    >
+                      <ModalHeader toggle={this.toggle}>
+                        Lets Kick In!
+                      </ModalHeader>
+                      <ModalBody>
+                        <div className="d-flex justify-content-center">
+                          <Button
+                            color="link"
+                            className="button-google "
+                            onClick={this.signin}
+                          >
+                            <img
+                              src="https://img.icons8.com/color/16/000000/google-logo.png"
+                              className="img-fluid"
+                              alt="Google"
+                            ></img>{" "}
+                            Sign in /Login via Google
+                          </Button>
+                        </div>
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button color="" onClick={this.toggle}>
+                          Close
+                        </Button>
+                      </ModalFooter>
+                    </Modal>
                   </div>
                 </div>
               </div>
@@ -83,9 +155,6 @@ export class Home extends Component {
             </g>
           </svg>
         </section>
-        <Button type="submit" onClick={this.signin}>
-          Google
-        </Button>
         <About />
         <Features />
       </div>

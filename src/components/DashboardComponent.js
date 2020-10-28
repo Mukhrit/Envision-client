@@ -27,7 +27,7 @@ class DashboardComponent extends React.Component {
       .catch((err) => console.log(err));
   }
   render() {
-    if (this.state.user) {
+    if (this.state.user && this.state.Allcontest) {
       let codeforces, codechef, atcoder;
       if (this.state.user.codechef_id) {
         codechef = this.state.user.codechef_id;
@@ -40,11 +40,17 @@ class DashboardComponent extends React.Component {
       }
       return (
         <div>
-          <div className='dashboard-header'></div>
-          <div className='dashboard-graph-main'></div>
-          <DashCard user={this.state.user} />
-          <Allcontest contests={this.state.Allcontest} />
-          <Card3 />
+          <div className="dashboard-header"></div>
+          <div className="dashboard-graph-main">
+            <DashCard user={this.state.user} />
+            <GraphMain
+              codechef={codechef}
+              codeforces={codeforces}
+              atcoder={atcoder}
+            />
+            <Allcontest contests={this.state.Allcontest} />
+            <Card3 />
+          </div>
         </div>
       );
     } else {

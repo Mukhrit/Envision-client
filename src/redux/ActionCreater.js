@@ -92,23 +92,31 @@ export const receiveDetails = (creds, isUsername) => {
 };
 export const filldetailsUser = (details) => (dispatch) => {
   return axios
-    .post(baseUrl + "users/filldetails", { ...details })
+    .post(
+      baseUrl + "users/filldetail",
+      { ...details },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
     .then((res) => res.data)
     .then((response) => {
-       var creds = {
-         user_id: response.user._id,
-         displayname: response.user.displayname,
-         username: response.user.envision_handle
-       };
-        var isUsername;
-        if (creds.username) {
-          isUsername = true;
-        } else {
-          isUsername = false;
-        }
-         localStorage.setItem("creds", JSON.stringify(creds));
-        // Dispatch the success action
-        dispatch(receiveDetails(creds, isUsername));
+      var creds = {
+        user_id: response.user._id,
+        displayname: response.user.displayname,
+        username: response.user.envision_handle,
+      };
+      var isUsername;
+      if (creds.username) {
+        isUsername = true;
+      } else {
+        isUsername = false;
+      }
+      localStorage.setItem("creds", JSON.stringify(creds));
+      // Dispatch the success action
+      dispatch(receiveDetails(creds, isUsername));
     })
     .catch((error) => dispatch(loginError(error.message)));
 
