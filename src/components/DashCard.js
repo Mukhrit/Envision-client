@@ -12,7 +12,6 @@ class DashCard extends React.Component {
   render() {
     const user = this.props.user;
 
-    console.log(user);
     //latest ratings ups and downs
     let diffchef =
       parseInt(

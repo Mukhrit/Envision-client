@@ -42,9 +42,10 @@ class DashboardComponent extends React.Component {
         <div>
           <div className='dashboard-header'></div>
           <div className='dashboard-graph-main'></div>
-          <DashCard user={this.state.user} />
+
+          <Card3 user={this.state.user} />
+          {/* <DashCard user={this.state.user} /> */}
           <Allcontest contests={this.state.Allcontest} />
-          <Card3 />
         </div>
       );
     } else {
