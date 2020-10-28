@@ -34,11 +34,12 @@ class Card3 extends React.Component {
     let ccrating = 0,
       cfrating = 0,
       atrating = '';
+    if (user.codechef_handle !== '')
+      ccrating = parseInt(number(user.codechef_id.highest_rating));
+    if (user.codeforces_handle !== '')
+      cfrating = parseInt(number(user.codeforces_id.highest_rating));
 
-    ccrating = parseInt(number(user.codechef_id.highest_rating));
-    cfrating = parseInt(number(user.codeforces_id.highest_rating));
-
-    if (user.atcoder_id.data !== null) {
+    if (user.atcoder_handle !== '' && user.atcoder_id.data !== null) {
       let c = 0;
       for (let i = 0; i <= user.atcoder_id.data[2].length; i++) {
         if (c > 0 && user.atcoder_id.data[2].charAt(i) === ' ') {
@@ -74,7 +75,10 @@ class Card3 extends React.Component {
     let streakcontestarr = [];
     let ct = 0,
       mx = 0;
-    if (user.codechef_id !== '') {
+    if (
+      user.codechef_handle !== '' &&
+      user.codechef_id.allcontests.length !== 0
+    ) {
       //codechef
       ct = 0;
       mx = 0;
@@ -100,7 +104,10 @@ class Card3 extends React.Component {
       }
       ccstreak = mx;
     }
-    if (user.codeforces_id !== '') {
+    if (
+      user.codeforces_handle !== '' &&
+      user.codeforces_id.allcontests.length !== 0
+    ) {
       //codeforces
       ct = 0;
       mx = 0;
@@ -116,7 +123,10 @@ class Card3 extends React.Component {
       }
       cfstreak = mx;
     }
-    if (user.atcoder_id.data !== null) {
+    if (
+      user.atcoder_handle !== '' &&
+      user.atcoder_id.recentSubmission !== null
+    ) {
       //atcoder
       ct = 0;
       mx = 0;
@@ -163,7 +173,10 @@ class Card3 extends React.Component {
     let cccontest = '',
       cfcontest = '',
       atcontest = '';
-    if (user.codechef_id !== '' && user.codechef_id.allcontests.length !== 0) {
+    if (
+      user.codechef_handle !== '' &&
+      user.codechef_id.allcontests.length !== 0
+    ) {
       //Codechef
       for (let i = 0; i < user.codechef_id.allcontests.length - 1; i++) {
         if (parseInt(user.codechef_id.allcontests[i].rank) < rank) {
@@ -174,7 +187,7 @@ class Card3 extends React.Component {
       ccrank = rank;
     }
     if (
-      user.codeforces_id !== '' &&
+      user.codeforces_handle !== '' &&
       user.codeforces_id.allcontests.length !== 0
     ) {
       //Codeforces
@@ -188,8 +201,8 @@ class Card3 extends React.Component {
       cfrank = rank;
     }
     if (
-      user.atcoder_id.data !== null &&
-      user.atcoder_id.recentSubmission.length !== 0
+      user.atcoder_handle !== '' &&
+      user.atcoder_id.recentSubmission !== null
     ) {
       //Atcoder
       rank = Number.MAX_VALUE;
