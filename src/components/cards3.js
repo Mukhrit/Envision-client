@@ -30,14 +30,16 @@ class Card3 extends React.Component {
     const user = this.props.user;
 
     let ratingarr = [];
+    let maxratingcontestarr = [];
     let ccrating = 0,
       cfrating = 0,
       atrating = '';
+    if (user.codechef_handle !== '')
+      ccrating = parseInt(number(user.codechef_id.highest_rating));
+    if (user.codeforces_handle !== '')
+      cfrating = parseInt(number(user.codeforces_id.highest_rating));
 
-    ccrating = number(user.codechef_id.highest_rating);
-    cfrating = number(user.codeforces_id.highest_rating);
-
-    if (user.atcoder_id.data !== null) {
+    if (user.atcoder_handle !== '' && user.atcoder_id.data !== null) {
       let c = 0;
       for (let i = 0; i <= user.atcoder_id.data[2].length; i++) {
         if (c > 0 && user.atcoder_id.data[2].charAt(i) === ' ') {
@@ -51,9 +53,18 @@ class Card3 extends React.Component {
       atrating = parseInt(atrating);
     }
     if (atrating == '') atrating = 0;
-    ratingarr.push(ccrating);
-    ratingarr.push(cfrating);
-    ratingarr.push(atrating);
+    if (ccrating !== 0) {
+      ratingarr.push(ccrating);
+      maxratingcontestarr.push('Codechef');
+    }
+    if (cfrating !== 0) {
+      ratingarr.push(cfrating);
+      maxratingcontestarr.push('Codeforces');
+    }
+    if (atrating !== 0 && atrating !== '') {
+      ratingarr.push(atrating);
+      maxratingcontestarr.push('Atcoder');
+    }
 
     //Streak Section
     let ccstreak = 0,
@@ -61,9 +72,13 @@ class Card3 extends React.Component {
       atstreak = 0;
 
     let streakarr = [];
+    let streakcontestarr = [];
     let ct = 0,
       mx = 0;
-    if (user.codechef_id !== '') {
+    if (
+      user.codechef_handle !== '' &&
+      user.codechef_id.allcontests.length !== 0
+    ) {
       //codechef
       ct = 0;
       mx = 0;
@@ -89,7 +104,10 @@ class Card3 extends React.Component {
       }
       ccstreak = mx;
     }
-    if (user.codeforces_id !== '') {
+    if (
+      user.codeforces_handle !== '' &&
+      user.codeforces_id.allcontests.length !== 0
+    ) {
       //codeforces
       ct = 0;
       mx = 0;
@@ -105,7 +123,10 @@ class Card3 extends React.Component {
       }
       cfstreak = mx;
     }
-    if (user.atcoder_id.data !== null) {
+    if (
+      user.atcoder_handle !== '' &&
+      user.atcoder_id.recentSubmission !== null
+    ) {
       //atcoder
       ct = 0;
       mx = 0;
@@ -125,10 +146,18 @@ class Card3 extends React.Component {
       }
       atstreak = mx;
     }
-
-    streakarr.push(ccstreak);
-    streakarr.push(cfstreak);
-    streakarr.push(atstreak);
+    if (ccstreak !== 0) {
+      streakarr.push(ccstreak);
+      streakcontestarr.push('Codechef');
+    }
+    if (cfstreak !== 0) {
+      streakarr.push(cfstreak);
+      streakcontestarr.push('Codeforces');
+    }
+    if (atstreak !== 0) {
+      streakarr.push(atstreak);
+      streakcontestarr.push('Atcoder');
+    }
 
     //Best Rank
 
@@ -137,13 +166,17 @@ class Card3 extends React.Component {
       atrank = 0;
 
     let rankarr = [];
+    let bestrankcontestarr = [];
     let contestarr = [];
     let rank = Number.MAX_VALUE;
 
     let cccontest = '',
       cfcontest = '',
       atcontest = '';
-    if (user.codechef_id !== '' && user.codechef_id.allcontests.length !== 0) {
+    if (
+      user.codechef_handle !== '' &&
+      user.codechef_id.allcontests.length !== 0
+    ) {
       //Codechef
       for (let i = 0; i < user.codechef_id.allcontests.length - 1; i++) {
         if (parseInt(user.codechef_id.allcontests[i].rank) < rank) {
@@ -154,7 +187,7 @@ class Card3 extends React.Component {
       ccrank = rank;
     }
     if (
-      user.codeforces_id !== '' &&
+      user.codeforces_handle !== '' &&
       user.codeforces_id.allcontests.length !== 0
     ) {
       //Codeforces
@@ -168,8 +201,8 @@ class Card3 extends React.Component {
       cfrank = rank;
     }
     if (
-      user.atcoder_id.data !== null &&
-      user.atcoder_id.recentSubmission.length !== 0
+      user.atcoder_handle !== '' &&
+      user.atcoder_id.recentSubmission !== null
     ) {
       //Atcoder
       rank = Number.MAX_VALUE;
@@ -181,13 +214,22 @@ class Card3 extends React.Component {
       }
       atrank = rank;
     }
+    if (ccrank !== 0) {
+      rankarr.push(ccrank);
+      bestrankcontestarr.push('Codechef');
+    }
+    if (cfrank !== 0) {
+      rankarr.push(cfrank);
+      bestrankcontestarr.push('Codeforces');
+    }
+    if (atrank !== 0) {
+      rankarr.push(atrank);
+      bestrankcontestarr.push('Atcoder');
+    }
 
-    rankarr.push(ccrank);
-    rankarr.push(cfrank);
-    rankarr.push(atrank);
-    contestarr.push(cccontest);
-    contestarr.push(cfcontest);
-    contestarr.push(atcontest);
+    if (ccrank !== 0) contestarr.push(cccontest);
+    if (cfrank !== 0) contestarr.push(cfcontest);
+    if (atrank !== 0) contestarr.push(atcontest);
 
     return (
       <div>
@@ -203,7 +245,10 @@ class Card3 extends React.Component {
               </CardHeader>
               <CardBody>
                 <div className='chart-area'>
-                  <Line data={MaxRating(ratingarr)} options={ratingoptions} />
+                  <Line
+                    data={MaxRating(ratingarr, maxratingcontestarr)}
+                    options={ratingoptions}
+                  />
                 </div>
               </CardBody>
             </Card>
@@ -219,7 +264,10 @@ class Card3 extends React.Component {
               </CardHeader>
               <CardBody>
                 <div className='chart-area'>
-                  <Bar data={Streak(streakarr)} options={streakoptions} />
+                  <Bar
+                    data={Streak(streakarr, streakcontestarr)}
+                    options={streakoptions}
+                  />
                 </div>
               </CardBody>
             </Card>
@@ -235,7 +283,7 @@ class Card3 extends React.Component {
               <CardBody>
                 <div className='chart-area'>
                   <Line
-                    data={BestRank(rankarr, contestarr)}
+                    data={BestRank(rankarr, contestarr, bestrankcontestarr)}
                     options={BestRankoptions}
                   />
                 </div>

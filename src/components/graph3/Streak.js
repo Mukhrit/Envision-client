@@ -46,7 +46,7 @@ export const streakoptions = {
   },
 };
 
-export const Streak = (streakarr) => (canvas) => {
+export const Streak = (streakarr, name) => (canvas) => {
   let ctx = canvas.getContext('2d');
 
   let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -54,14 +54,9 @@ export const Streak = (streakarr) => (canvas) => {
   gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
   gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
   gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-  let contestnames = ['Codechef', 'Codeforces', 'Atcoder'];
-  let finalcontestnames = [];
-  let c = 0;
-  for (let i = 0; i < streakarr.length - 1; i++) {
-    finalcontestnames.push(contestnames[c++]);
-  }
+
   return {
-    labels: finalcontestnames,
+    labels: name,
     datasets: [
       {
         label: 'Streak',

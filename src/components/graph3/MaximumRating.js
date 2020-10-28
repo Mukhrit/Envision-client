@@ -46,7 +46,7 @@ export const ratingoptions = {
   },
 };
 
-export const MaxRating = (ratingarr) => (canvas) => {
+export const MaxRating = (ratingarr, name) => (canvas) => {
   let ctx = canvas.getContext('2d');
 
   let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -54,16 +54,9 @@ export const MaxRating = (ratingarr) => (canvas) => {
   gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
   gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
   gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
-  let contestnames = ['Codechef', 'Codeforces', 'Atcoder'];
-  let finalcontestnames = [];
-  let c = 0;
-
-  for (let i = 0; i < ratingarr.length - 1; i++) {
-    finalcontestnames.push(contestnames[c++]);
-  }
 
   return {
-    labels: finalcontestnames,
+    labels: name,
     datasets: [
       {
         label: 'Rating',

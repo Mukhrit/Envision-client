@@ -57,7 +57,8 @@ class Allcontest extends React.Component {
       if (date1Updated === date2Updated) return date1Updateds - date2Updateds;
       return date1Updated - date2Updated;
     });
-
+    var d = new Date();
+    console.log(d);
     return (
       <Row>
         <Col lg='6' md='12'>

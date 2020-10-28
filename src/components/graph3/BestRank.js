@@ -62,7 +62,7 @@ export const BestRankoptions = {
   },
 };
 
-export const BestRank = (atarr, contestarr) => (canvas) => {
+export const BestRank = (atarr, contestarr, name) => (canvas) => {
   let ctx = canvas.getContext('2d');
 
   let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -70,14 +70,9 @@ export const BestRank = (atarr, contestarr) => (canvas) => {
   gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
   gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
   gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
-  let contestnames = ['Codechef', 'Codeforces', 'Atcoder'];
-  let finalcontestnames = [];
-  let c = 0;
-  for (let i = 0; i < atarr.length - 1; i++) {
-    finalcontestnames.push(contestnames[c++]);
-  }
+
   return {
-    labels: finalcontestnames,
+    labels: name,
     datasets: [
       {
         label: 'here',
