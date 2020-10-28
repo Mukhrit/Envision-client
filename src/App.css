@@ -9,3 +9,17 @@
 .dashboard-graph-main{
     margin: 10px;
 }
+.dashboard_loader{
+    position: relative;
+    background-color: #17252a;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 35vh;
+}
+.dashboard_loader_spin{
+}
+.dashboard_loader_spin i{
+    color: #1acc8d;
+}

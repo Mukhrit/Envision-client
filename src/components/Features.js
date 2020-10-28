@@ -5,134 +5,88 @@ export class Features extends Component {
   render() {
     return (
       <div>
-        <section id='features' class='features'>
-          <div class='container'>
-            <div class='section-title' data-aos='fade-up'>
-              <h2>Features</h2>
-              <p>Check The Features</p>
+        <section id="features" class="features mb-5">
+          <div class="container">
+            <div
+              class="section-title"
+              data-aos="fade-up"
+              style={{ color: "#17252a" }}
+            >
+              <h2 style={{ color: "#17252a" }}>Features</h2>
+              <p style={{ color: "#17252a" }}>Check The Features</p>
             </div>
 
-            <div class='row' data-aos='fade-left'>
-              <div class='col-lg-3 col-md-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='50'>
-                  <i class='ri-store-line' style={{ color: '#ffbb2c' }}></i>
-                  <h3>
-                    <a href=''>Lorem Ipsum</a>
-                  </h3>
-                </div>
-              </div>
-              <div class='col-lg-3 col-md-4 mt-4 mt-md-0'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='100'>
+            <div class="row" data-aos="fade-left">
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
                   <i
-                    class='ri-bar-chart-box-line'
-                    style={{ color: '#5578ff' }}
+                    class="ri-bar-chart-box-line"
+                    style={{ color: "#5578ff" }}
                   ></i>
                   <h3>
-                    <a href=''>Dolor Sitema</a>
+                    <a>Accurate Data</a>
                   </h3>
                 </div>
               </div>
-              <div class='col-lg-3 col-md-4 mt-4 mt-md-0'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='150'>
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="150">
                   <i
-                    class='ri-calendar-todo-line'
-                    style={{ color: '#e80368' }}
+                    class="fa fa-fast-forward"
+                    style={{ color: "#e80368" }}
                   ></i>
                   <h3>
-                    <a href=''>Sed perspiciatis</a>
+                    <a>Dynamic report</a>
                   </h3>
                 </div>
               </div>
-              <div class='col-lg-3 col-md-4 mt-4 mt-lg-0'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='200'>
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="350">
                   <i
-                    class='ri-paint-brush-line'
-                    style={{ color: '#e361ff' }}
+                    class="ri-file-list-3-line"
+                    style={{ color: "#11dbcf" }}
                   ></i>
                   <h3>
-                    <a href=''>Magni Dolores</a>
+                    <a>Overall rating graph</a>
                   </h3>
                 </div>
               </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='250'>
-                  <i
-                    class='ri-database-2-line'
-                    style={{ color: '#47aeff' }}
-                  ></i>
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="400">
+                  <i class="fa fa-star " style={{ color: "#4233ff" }}></i>
                   <h3>
-                    <a href=''>Nemo Enim</a>
+                    <a >Maximum rating over all websites</a>
                   </h3>
                 </div>
               </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='300'>
-                  <i
-                    class='ri-gradienter-line'
-                    style={{ color: ' #ffa76e' }}
-                  ></i>
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="450">
+                  <i class="fa fa-bar-chart" style={{ color: "#b2904f" }}></i>
                   <h3>
-                    <a href=''>Eiusmod Tempor</a>
+                    <a>Streaks!</a>
                   </h3>
                 </div>
               </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='350'>
-                  <i
-                    class='ri-file-list-3-line'
-                    style={{ color: '#11dbcf' }}
-                  ></i>
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="500">
+                  <i class="fa fa-file-code-o" style={{ color: "#b20969" }}></i>
                   <h3>
-                    <a href=''>Midela Teren</a>
+                    <a>Total Contest</a>
                   </h3>
                 </div>
               </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='400'>
-                  <i
-                    class='ri-price-tag-2-line'
-                    style={{ color: '#4233ff' }}
-                  ></i>
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="550">
+                  <i class="fa fa-arrow-up" style={{ color: "#ff5828" }}></i>
                   <h3>
-                    <a href=''>Pira Neve</a>
+                    <a>Maximum rank in a contest</a>
                   </h3>
                 </div>
               </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='450'>
-                  <i class='ri-anchor-line' style={{ color: '#b2904f' }}></i>
+              <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box" data-aos="zoom-in" data-aos-delay="600">
+                  <i class="fa fa-search" style={{ color: "#29cc61" }}></i>
                   <h3>
-                    <a href=''>Dirada Pack</a>
-                  </h3>
-                </div>
-              </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='500'>
-                  <i class='ri-disc-line' style={{ color: '#b20969' }}></i>
-                  <h3>
-                    <a href=''>Moton Ideal</a>
-                  </h3>
-                </div>
-              </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='550'>
-                  <i
-                    class='ri-base-station-line'
-                    style={{ color: '#ff5828' }}
-                  ></i>
-                  <h3>
-                    <a href=''>Verdo Park</a>
-                  </h3>
-                </div>
-              </div>
-              <div class='col-lg-3 col-md-4 mt-4'>
-                <div class='icon-box' data-aos='zoom-in' data-aos-delay='600'>
-                  <i
-                    class='ri-fingerprint-line'
-                    style={{ color: '#29cc61' }}
-                  ></i>
-                  <h3>
-                    <a href=''>Flavor Nivelanda</a>
+                    <a >Search Your friends</a>
                   </h3>
                 </div>
               </div>

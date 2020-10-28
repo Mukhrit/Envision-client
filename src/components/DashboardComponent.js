@@ -3,9 +3,9 @@ import React from 'react';
 import { baseUrl } from '../shared/baseUrl';
 import GraphMain from './GraphMain';
 import DashCard from './DashCard';
-import { Dashboard } from '@material-ui/icons';
 import Allcontest from './Allcontest';
 import Card3 from './cards3';
+import Dashboardavatar from './Dashboardavatar';
 
 class DashboardComponent extends React.Component {
   constructor(props) {
@@ -41,6 +41,7 @@ class DashboardComponent extends React.Component {
       return (
         <div>
           <div className="dashboard-header"></div>
+          <Dashboardavatar user={this.state.user} />
           <div className="dashboard-graph-main">
             <DashCard user={this.state.user} />
             <GraphMain
@@ -54,7 +55,17 @@ class DashboardComponent extends React.Component {
         </div>
       );
     } else {
-      return <div>Loading</div>;
+      return (
+        <div>
+          <div className="dashboard-header"></div>
+          <div className="dashboard_loader">
+            <div className="dashboard_loader_spin">
+              <i class="fa fa-4x fa-spinner fa-spin "></i>
+              
+            </div>
+          </div>
+        </div>
+      );
     }
   }
 }

@@ -47,12 +47,12 @@ export class Home extends Component {
               <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
                 <div data-aos="zoom-out">
                   <h1>
-                    Anaylze your Competitive Programming with
+                    Anaylsis your Competitive Programming with{" "}
                     <span>Envision</span>
                   </h1>
                   <h2>
-                    We are here to showcase your talent and anaylze you cp with
-                    your friends
+                    We are here to showcase your talent and anaylsis you cp with
+                    your friends{" "}
                   </h2>
                   {this.props.auth.isAuthenticated === false ? (
                     <div class="text-center text-lg-left">

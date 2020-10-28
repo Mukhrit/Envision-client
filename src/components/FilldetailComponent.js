@@ -39,28 +39,31 @@ export class Filldetails extends Component {
      this.checkAtcoder(),
    ]);
     if (
-      this.state.usernameValid &&
-      ((this.state.codechefValid && this.state.codechef_username !== "") ||
-        this.state.codechef_username === "") &&
-      ((this.state.codeforcesValid && this.state.codeforces_username !== "") ||
-        this.state.codeforces_username === "") &&
-      ((this.state.atcoderValid && this.state.atcoder_username !== "") ||
-        this.state.atcoder_username === "")
-    ){
-      var user_details={};
-        user_details.envision_handle = this.state.username;
-        if (this.state.codechef_username!=="")
-          user_details.codechef_handle = this.state.codechef_username;
-        if (this.state.codeforces_username!=="")
-          user_details.codeforces_handle = this.state.codeforces_username;
-        if (this.state.atcoder_username!=="")
-          user_details.atcoder_handle = this.state.atcoder_username;
-      // this.props.filldetailsUser(user_details);
-      alert(JSON.stringify(this.state));
-
-    }else {
-      alert("Please fill atleast one username")
-      console.log({success:false});
+      (this.state.usernameValid &&
+        ((this.state.codechefValid && this.state.codechef_username !== "") ||
+          this.state.codechef_username === "") &&
+        ((this.state.codeforcesValid &&
+          this.state.codeforces_username !== "") ||
+          this.state.codeforces_username === "") &&
+        ((this.state.atcoderValid && this.state.atcoder_username !== "") ||
+          this.state.atcoder_username === "") &&
+        this.state.codechef_username !== "") ||
+      this.state.codeforces_username !== "" ||
+      this.state.atcoder_username !== ""
+    ) {
+      var user_details = {};
+      user_details.envision_handle = this.state.username;
+      if (this.state.codechef_username !== "")
+        user_details.codechef_handle = this.state.codechef_username;
+      if (this.state.codeforces_username !== "")
+        user_details.codeforces_handle = this.state.codeforces_username;
+      if (this.state.atcoder_username !== "")
+        user_details.atcoder_handle = this.state.atcoder_username;
+         this.setState({ isLoading: true, loadingmessage: "Creating your profile" });
+     await this.props.filldetailsUser(user_details);
+    } else {
+      alert("Please fill atleast one username or resolve error");
+      console.log({ success: false });
     }
     this.setState({ isLoading: false, loadingmessage: "" });
   }

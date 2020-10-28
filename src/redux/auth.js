@@ -55,7 +55,6 @@ export const Auth = (
     case ActionTypes.FILLDETAILS_SUCCESS:
       return {
         ...state,
-        isUsername: action.isUsername,
         user: action.creds
       };
     default:

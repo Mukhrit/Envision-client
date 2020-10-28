@@ -67,7 +67,7 @@ export const optionatcoder = {
   },
 };
 export const atcodergraph = (atcoder) => (canvas) => {
-  let allcontests = atcoder.recentSubmission;
+  let allcontests = atcoder.recentSubmission? atcoder.recentSubmission:[];
 
   let ctx = canvas.getContext("2d");
 

@@ -25,14 +25,18 @@ class DashCard extends React.Component {
       );
 
     let diffcf = user.codeforces_id.allcontests[0][4];
-
-    let atcoderdiff =
-      user.atcoder_id.recentSubmission[
-        user.atcoder_id.recentSubmission.length - 1
-      ].NewRating -
-      user.atcoder_id.recentSubmission[
-        user.atcoder_id.recentSubmission.length - 1
-      ].OldRating;
+     let atcoderdiff;
+        if(user.atcoder_id.recentSubmission){
+             atcoderdiff =
+              user.atcoder_id.recentSubmission[
+                user.atcoder_id.recentSubmission.length - 1
+              ].NewRating -
+              user.atcoder_id.recentSubmission[
+                user.atcoder_id.recentSubmission.length - 1
+              ].OldRating;
+        }else{
+                  atcoderdiff=0;
+        }
     //colors for positive and negative
     let chefcol = '#7CFC00';
     let forcecol = '#7CFC00';
@@ -56,8 +60,12 @@ class DashCard extends React.Component {
     //rating colors
     let codechefstars = user.codechef_id.star,
       codeforcesstage = user.codeforces_id.rating_stage;
-
-    let atcoderranking = user.atcoder_id.data[1].substring(6);
+      let atcoderranking
+    if(user.atcoder_id.data){
+      atcoderranking = user.atcoder_id.data[1].substring(6);
+    }else{
+       atcoderranking=0;
+    }
 
     let codechefrating = user.codechef_id.rating;
 
@@ -135,38 +143,38 @@ class DashCard extends React.Component {
     }
 
     return (
-      <div className='cardparent'>
-        <div className='row justify-content-center'>
-          <div class='col-lg-3'>
-            <div class='card-stats card'>
-              <div class='card-body'>
-                <div class='row'>
-                  <div class='col-12'>
-                    <div class='info-icon text-center icon-warning'>
-                      <i class='tim-icons icon-chat-33 '>
-                        {' '}
+      <div className="cardparent">
+        <div className="row justify-content-center">
+          <div class="col-lg-3">
+            <div class="card-stats card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="info-icon text-center icon-warning">
+                      <i class="tim-icons icon-chat-33 ">
+                        {" "}
                         <span
-                          class='iconify'
-                          data-icon='simple-icons:codechef'
-                          data-inline='false'
+                          class="iconify"
+                          data-icon="simple-icons:codechef"
+                          data-inline="false"
                         ></span>
                       </i>
                     </div>
                   </div>
                 </div>
-                <div className='row' style={{ justifyContent: 'right' }}>
-                  <div class='col-12 '>
-                    <div class='numbers'>
-                      <h3 class='card-title'>
-                        Rating :{' '}
+                <div className="row" style={{ justifyContent: "right" }}>
+                  <div class="col-12 ">
+                    <div class="numbers">
+                      <h3 class="card-title">
+                        Rating :{" "}
                         <span
                           style={{
-                            color: 'white',
-                            fontSize: '30px',
+                            color: "white",
+                            fontSize: "30px",
                             backgroundColor: codechefcolor,
-                            padding: '1px',
-                            fontWeight: 'bolder',
-                            marginLeft: '10px',
+                            padding: "1px",
+                            fontWeight: "bolder",
+                            marginLeft: "10px",
                           }}
                         >
                           {user.codechef_id.star}
@@ -175,8 +183,8 @@ class DashCard extends React.Component {
                       </h3>
 
                       <p
-                        class='card-category'
-                        style={{ fontSize: '27px', color: chefcol }}
+                        class="card-category"
+                        style={{ fontSize: "27px", color: chefcol }}
                       >
                         {diffchef}
                       </p>
@@ -184,47 +192,47 @@ class DashCard extends React.Component {
                   </div>
                 </div>
               </div>
-              <div class='card-footer'>
+              <div class="card-footer">
                 <hr />
-                <div class='stats'>
+                <div class="stats">
                   <span
-                    class='iconify'
-                    data-icon='simple-icons:codechef'
-                    data-inline='false'
-                    style={{ marginBottom: '4px' }}
-                  ></span>{' '}
+                    class="iconify"
+                    data-icon="simple-icons:codechef"
+                    data-inline="false"
+                    style={{ marginBottom: "4px" }}
+                  ></span>{" "}
                   Codechef
                 </div>
               </div>
             </div>
           </div>
-          <div class='col-lg-3'>
-            <div class='card-stats card'>
-              <div class='card-body'>
-                <div class='row'>
-                  <div class='col-12'>
-                    <div class='info-icon text-center icon-warning'>
-                      <i class='tim-icons icon-chat-33'>
+          <div class="col-lg-3">
+            <div class="card-stats card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="info-icon text-center icon-warning">
+                      <i class="tim-icons icon-chat-33">
                         <span
-                          class='iconify'
-                          data-icon='simple-icons:codeforces'
-                          data-inline='false'
+                          class="iconify"
+                          data-icon="simple-icons:codeforces"
+                          data-inline="false"
                         ></span>
                       </i>
                     </div>
                   </div>
                 </div>
-                <div className='row' style={{ justifyContent: 'right' }}>
-                  <div class='col-12'>
-                    <div class='numbers'>
-                      <h3 class='card-title'>
-                        Rating :{' '}
+                <div className="row" style={{ justifyContent: "right" }}>
+                  <div class="col-12">
+                    <div class="numbers">
+                      <h3 class="card-title">
+                        Rating :{" "}
                         <span
                           style={{
-                            marginRight: '10px',
+                            marginRight: "10px",
                             color: codeforcescolor,
-                            fontWeight: 'bolder',
-                            padding: '5px',
+                            fontWeight: "bolder",
+                            padding: "5px",
                           }}
                         >
                           {user.codeforces_id.rating_stage}
@@ -233,8 +241,8 @@ class DashCard extends React.Component {
                       </h3>
 
                       <p
-                        class='card-category'
-                        style={{ fontSize: '27px', color: forcecol }}
+                        class="card-category"
+                        style={{ fontSize: "27px", color: forcecol }}
                       >
                         {diffcf}
                       </p>
@@ -242,57 +250,59 @@ class DashCard extends React.Component {
                   </div>
                 </div>
               </div>
-              <div class='card-footer'>
+              <div class="card-footer">
                 <hr />
-                <div class='stats'>
+                <div class="stats">
                   <span
-                    class='iconify'
-                    data-icon='simple-icons:codeforces'
-                    data-inline='false'
-                    style={{ marginBottom: '3px' }}
-                  ></span>{' '}
+                    class="iconify"
+                    data-icon="simple-icons:codeforces"
+                    data-inline="false"
+                    style={{ marginBottom: "3px" }}
+                  ></span>{" "}
                   Codeforces
                 </div>
               </div>
             </div>
           </div>
-          <div class='col-lg-3'>
-            <div class='card-stats card'>
-              <div class='card-body'>
-                <div class='row'>
-                  <div class='col-12'>
-                    <div class='info-icon text-center icon-warning'>
-                      <i class='tim-icons icon-chat-33'>
+          <div class="col-lg-3">
+            <div class="card-stats card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="info-icon text-center icon-warning">
+                      <i class="tim-icons icon-chat-33">
                         <span
-                          class='iconify'
-                          data-icon='mdi:unicorn-variant'
-                          data-inline='false'
+                          class="iconify"
+                          data-icon="mdi:unicorn-variant"
+                          data-inline="false"
                         ></span>
                       </i>
                     </div>
                   </div>
                 </div>
-                <div className='row' style={{ justifyContent: 'right' }}>
-                  <div class='col-12'>
-                    <div class='numbers'>
-                      <h3 class='card-title'>
+                <div className="row" style={{ justifyContent: "right" }}>
+                  <div class="col-12">
+                    <div class="numbers">
+                      <h3 class="card-title">
                         Rating :
                         <span
                           style={{
-                            marginLeft: '10px',
+                            marginLeft: "10px",
                             color: atcodercolor,
-                            fontWeight: 'bolder',
-                            padding: '5px',
+                            fontWeight: "bolder",
+                            padding: "5px",
                           }}
                         >
                           {atcodercolorname}
                         </span>
-                        {user.atcoder_id.data[1].substring(6)}
+                        {user.atcoder_id.data?user.atcoder_id.data[1].substring(
+                          6
+                        ):0}
                       </h3>
 
                       <p
-                        class='card-category'
-                        style={{ fontSize: '27px', color: atcodercol }}
+                        class="card-category"
+                        style={{ fontSize: "27px", color: atcodercol }}
                       >
                         {atcoderdiff}
                       </p>
@@ -300,14 +310,14 @@ class DashCard extends React.Component {
                   </div>
                 </div>
               </div>
-              <div class='card-footer'>
+              <div class="card-footer">
                 <hr />
-                <div class='stats'>
+                <div class="stats">
                   <span
-                    class='iconify'
-                    data-icon='mdi:unicorn-variant'
-                    data-inline='false'
-                    style={{ marginRight: '5px', marginBottom: '2px' }}
+                    class="iconify"
+                    data-icon="mdi:unicorn-variant"
+                    data-inline="false"
+                    style={{ marginRight: "5px", marginBottom: "2px" }}
                   ></span>
                   Atcoder
                 </div>

@@ -2,7 +2,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-import { Redirect, } from "react-router-dom";
+import { Redirect, Link} from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { auth, provider } from "../firebase";
 
@@ -150,14 +150,20 @@ class Header extends React.Component {
                         {this.props.auth.user.displayname}
                       </div>
                       <b className="caret d-none d-lg-block d-xl-block" />
-                  
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-navbar" right tag="ul">
-                      <NavLink tag="li">
+                      {this.props.auth.user.username?
+                      <Link
+                        tag="li"
+                        to={(location) =>
+                          `dashboard/${this.props.auth.user.username}`
+                        }
+                      >
                         <DropdownItem className="nav-item">
                           Profile
                         </DropdownItem>
-                      </NavLink>
+                      </Link>:null}
+                      
                       <DropdownItem divider tag="li" />
                       <NavLink tag="li">
                         <DropdownItem

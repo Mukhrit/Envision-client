@@ -21,8 +21,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (user) => dispatch(loginUser(user)),
   logoutUser: () => dispatch(logoutUser()),
-  filldetailsUser: (user, isUsername) =>
-    dispatch(filldetailsUser(user, isUsername)),
+  filldetailsUser: (user) =>
+    dispatch(filldetailsUser(user)),
 });
 class Main extends Component {
   render() {
@@ -98,6 +98,7 @@ class Main extends Component {
             />
             <Redirect to="/home" />
           </Switch>
+          <Footer/>
         </div>
       );
     }
@@ -113,7 +114,7 @@ class Main extends Component {
               <Route
                 exact
                 path="/filldetails"
-                component={() => <Filldetails auth={this.props.auth}  loginUser={this.props.loginUser}/>}
+                component={() => <Filldetails auth={this.props.auth}  loginUser={this.props.loginUser} filldetailsUser={this.props.filldetailsUser}/>}
               />
               <Redirect to="/filldetails" />
             </Switch>
@@ -143,6 +144,7 @@ class Main extends Component {
                />
                <Redirect to="/home" />
              </Switch>
+             <Footer />
            </div>
          );
       }
