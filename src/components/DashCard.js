@@ -11,31 +11,52 @@ class DashCard extends React.Component {
 
   render() {
     const user = this.props.user;
+    let diffchef = 0,
+      diffcf = 0,
+      atcoderdiff = 0;
 
     //latest ratings ups and downs
-    let diffchef =
-      parseInt(
-        user.codechef_id.allcontests[user.codechef_id.allcontests.length - 1]
-          .rating
-      ) -
-      parseInt(
-        user.codechef_id.allcontests[user.codechef_id.allcontests.length - 2]
-          .rating
-      );
+    if (
+      user.codechef_handle !== '' &&
+      user.codechef_id.allcontests.length !== 0
+    ) {
+      diffchef =
+        parseInt(
+          user.codechef_id.allcontests[user.codechef_id.allcontests.length - 1]
+            .rating
+        ) -
+        parseInt(
+          user.codechef_id.allcontests[user.codechef_id.allcontests.length - 2]
+            .rating
+        );
+    }
+    if (
+      user.codeforces_handle !== '' &&
+      user.codeforces_id.allcontests.length !== 0
+    ) {
+      diffcf = parseInt(user.codeforces_id.allcontests[0][4]);
+    }
+    if (
+      user.atcoder_handle !== '' &&
+      user.atcoder_id.recentSubmission !== null
+    ) {
+      if (user.atcoder_id.recentSubmission) {
+        atcoderdiff =
+          parseInt(
+            user.atcoder_id.recentSubmission[
+              user.atcoder_id.recentSubmission.length - 1
+            ].NewRating
+          ) -
+          parseInt(
+            user.atcoder_id.recentSubmission[
+              user.atcoder_id.recentSubmission.length - 1
+            ].OldRating
+          );
+      } else {
+        atcoderdiff = 0;
+      }
+    }
 
-    let diffcf = user.codeforces_id.allcontests[0][4];
-     let atcoderdiff;
-        if(user.atcoder_id.recentSubmission){
-             atcoderdiff =
-              user.atcoder_id.recentSubmission[
-                user.atcoder_id.recentSubmission.length - 1
-              ].NewRating -
-              user.atcoder_id.recentSubmission[
-                user.atcoder_id.recentSubmission.length - 1
-              ].OldRating;
-        }else{
-                  atcoderdiff=0;
-        }
     //colors for positive and negative
     let chefcol = '#7CFC00';
     let forcecol = '#7CFC00';
@@ -57,18 +78,20 @@ class DashCard extends React.Component {
       atcodercol = '#FF3A3A';
     }
     //rating colors
-    let codechefstars = user.codechef_id.star,
-      codeforcesstage = user.codeforces_id.rating_stage;
-      let atcoderranking
-    if(user.atcoder_id.data){
-      atcoderranking = user.atcoder_id.data[1].substring(6);
-    }else{
-       atcoderranking=0;
+
+    let atcoderranking = 0,
+      codechefrating = 0,
+      codeforcesrating = 0;
+
+    if (user.atcoder_handle !== '' && user.atcoder_id.data !== null) {
+      atcoderranking = parseInt(user.atcoder_id.data[1].substring(6));
+    } else {
+      atcoderranking = 0;
     }
-
-    let codechefrating = user.codechef_id.rating;
-
-    let codeforcesrating = user.codeforces_id.rating;
+    if (user.codechef_handle !== '')
+      codechefrating = parseInt(user.codechef_id.rating);
+    if (user.codeforces_handle !== '')
+      codeforcesrating = parseInt(user.codeforces_id.rating);
 
     let atcodercolor = '';
     let atcodercolorname = '';
@@ -142,187 +165,193 @@ class DashCard extends React.Component {
     }
 
     return (
-      <div className="cardparent">
-        <div className="row justify-content-center">
-          <div class="col-lg-3">
-            <div class="card-stats card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="info-icon text-center icon-warning">
-                      <i class="tim-icons icon-chat-33 ">
-                        {" "}
-                        <span
-                          class="iconify"
-                          data-icon="simple-icons:codechef"
-                          data-inline="false"
-                        ></span>
-                      </i>
+      <div className='cardparent'>
+        <div className='row justify-content-center'>
+          {user.codechef_handle !== '' && (
+            <div class='col-lg-3'>
+              <div class='card-stats card'>
+                <div class='card-body'>
+                  <div class='row'>
+                    <div class='col-12'>
+                      <div class='info-icon text-center icon-warning'>
+                        <i class='tim-icons icon-chat-33 '>
+                          {' '}
+                          <span
+                            class='iconify'
+                            data-icon='simple-icons:codechef'
+                            data-inline='false'
+                          ></span>
+                        </i>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="row" style={{ justifyContent: "right" }}>
-                  <div class="col-12 ">
-                    <div class="numbers">
-                      <h3 class="card-title">
-                        Rating :{" "}
-                        <span
-                          style={{
-                            color: "white",
-                            fontSize: "30px",
-                            backgroundColor: codechefcolor,
-                            padding: "1px",
-                            fontWeight: "bolder",
-                            marginLeft: "10px",
-                          }}
-                        >
-                          {user.codechef_id.star}
-                        </span>
-                        <span> {user.codechef_id.rating}</span>
-                      </h3>
+                  <div className='row' style={{ justifyContent: 'right' }}>
+                    <div class='col-12 '>
+                      <div class='numbers'>
+                        <h3 class='card-title'>
+                          Rating :{' '}
+                          <span
+                            style={{
+                              color: 'white',
+                              fontSize: '30px',
+                              backgroundColor: codechefcolor,
+                              padding: '1px',
+                              fontWeight: 'bolder',
+                              marginLeft: '10px',
+                            }}
+                          >
+                            {user.codechef_id.star}
+                          </span>
+                          <span> {user.codechef_id.rating}</span>
+                        </h3>
 
-                      <p
-                        class="card-category"
-                        style={{ fontSize: "27px", color: chefcol }}
-                      >
-                        {diffchef}
-                      </p>
+                        <p
+                          class='card-category'
+                          style={{ fontSize: '27px', color: chefcol }}
+                        >
+                          {diffchef}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer">
-                <hr />
-                <div class="stats">
-                  <span
-                    class="iconify"
-                    data-icon="simple-icons:codechef"
-                    data-inline="false"
-                    style={{ marginBottom: "4px" }}
-                  ></span>{" "}
-                  Codechef
+                <div class='card-footer'>
+                  <hr />
+                  <div class='stats'>
+                    <span
+                      class='iconify'
+                      data-icon='simple-icons:codechef'
+                      data-inline='false'
+                      style={{ marginBottom: '4px' }}
+                    ></span>{' '}
+                    Codechef
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="card-stats card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="info-icon text-center icon-warning">
-                      <i class="tim-icons icon-chat-33">
-                        <span
-                          class="iconify"
-                          data-icon="simple-icons:codeforces"
-                          data-inline="false"
-                        ></span>
-                      </i>
+          )}
+          {user.codeforces_handle !== '' && (
+            <div class='col-lg-3'>
+              <div class='card-stats card'>
+                <div class='card-body'>
+                  <div class='row'>
+                    <div class='col-12'>
+                      <div class='info-icon text-center icon-warning'>
+                        <i class='tim-icons icon-chat-33'>
+                          <span
+                            class='iconify'
+                            data-icon='simple-icons:codeforces'
+                            data-inline='false'
+                          ></span>
+                        </i>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="row" style={{ justifyContent: "right" }}>
-                  <div class="col-12">
-                    <div class="numbers">
-                      <h3 class="card-title">
-                        Rating :{" "}
-                        <span
-                          style={{
-                            marginRight: "10px",
-                            color: codeforcescolor,
-                            fontWeight: "bolder",
-                            padding: "5px",
-                          }}
-                        >
-                          {user.codeforces_id.rating_stage}
-                        </span>
-                        {user.codeforces_id.rating}
-                      </h3>
+                  <div className='row' style={{ justifyContent: 'right' }}>
+                    <div class='col-12'>
+                      <div class='numbers'>
+                        <h3 class='card-title'>
+                          Rating :{' '}
+                          <span
+                            style={{
+                              marginRight: '10px',
+                              color: codeforcescolor,
+                              fontWeight: 'bolder',
+                              padding: '5px',
+                            }}
+                          >
+                            {user.codeforces_id.rating_stage}
+                          </span>
+                          {user.codeforces_id.rating}
+                        </h3>
 
-                      <p
-                        class="card-category"
-                        style={{ fontSize: "27px", color: forcecol }}
-                      >
-                        {diffcf}
-                      </p>
+                        <p
+                          class='card-category'
+                          style={{ fontSize: '27px', color: forcecol }}
+                        >
+                          {diffcf}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer">
-                <hr />
-                <div class="stats">
-                  <span
-                    class="iconify"
-                    data-icon="simple-icons:codeforces"
-                    data-inline="false"
-                    style={{ marginBottom: "3px" }}
-                  ></span>{" "}
-                  Codeforces
+                <div class='card-footer'>
+                  <hr />
+                  <div class='stats'>
+                    <span
+                      class='iconify'
+                      data-icon='simple-icons:codeforces'
+                      data-inline='false'
+                      style={{ marginBottom: '3px' }}
+                    ></span>{' '}
+                    Codeforces
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="card-stats card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="info-icon text-center icon-warning">
-                      <i class="tim-icons icon-chat-33">
-                        <span
-                          class="iconify"
-                          data-icon="mdi:unicorn-variant"
-                          data-inline="false"
-                        ></span>
-                      </i>
+          )}
+          {user.atcoder_handle !== '' && (
+            <div class='col-lg-3'>
+              <div class='card-stats card'>
+                <div class='card-body'>
+                  <div class='row'>
+                    <div class='col-12'>
+                      <div class='info-icon text-center icon-warning'>
+                        <i class='tim-icons icon-chat-33'>
+                          <span
+                            class='iconify'
+                            data-icon='mdi:unicorn-variant'
+                            data-inline='false'
+                          ></span>
+                        </i>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="row" style={{ justifyContent: "right" }}>
-                  <div class="col-12">
-                    <div class="numbers">
-                      <h3 class="card-title">
-                        Rating :
-                        <span
-                          style={{
-                            marginLeft: "10px",
-                            color: atcodercolor,
-                            fontWeight: "bolder",
-                            padding: "5px",
-                          }}
-                        >
-                          {atcodercolorname}
-                        </span>
-                        {user.atcoder_id.data?user.atcoder_id.data[1].substring(
-                          6
-                        ):0}
-                      </h3>
+                  <div className='row' style={{ justifyContent: 'right' }}>
+                    <div class='col-12'>
+                      <div class='numbers'>
+                        <h3 class='card-title'>
+                          Rating :
+                          <span
+                            style={{
+                              marginLeft: '10px',
+                              color: atcodercolor,
+                              fontWeight: 'bolder',
+                              padding: '5px',
+                            }}
+                          >
+                            {atcodercolorname}
+                          </span>
+                          {user.atcoder_id.data
+                            ? user.atcoder_id.data[1].substring(6)
+                            : 0}
+                        </h3>
 
-                      <p
-                        class="card-category"
-                        style={{ fontSize: "27px", color: atcodercol }}
-                      >
-                        {atcoderdiff}
-                      </p>
+                        <p
+                          class='card-category'
+                          style={{ fontSize: '27px', color: atcodercol }}
+                        >
+                          {atcoderdiff}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer">
-                <hr />
-                <div class="stats">
-                  <span
-                    class="iconify"
-                    data-icon="mdi:unicorn-variant"
-                    data-inline="false"
-                    style={{ marginRight: "5px", marginBottom: "2px" }}
-                  ></span>
-                  Atcoder
+                <div class='card-footer'>
+                  <hr />
+                  <div class='stats'>
+                    <span
+                      class='iconify'
+                      data-icon='mdi:unicorn-variant'
+                      data-inline='false'
+                      style={{ marginRight: '5px', marginBottom: '2px' }}
+                    ></span>
+                    Atcoder
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );

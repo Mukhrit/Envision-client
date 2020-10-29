@@ -37,7 +37,7 @@ export class About extends Component {
                   </h4>
                   <p class='description'>
                     Show case others what milestones you have achieved in the
-                    competitive programming world
+                    competitive programming world.
                   </p>
                 </div>
 
@@ -58,7 +58,7 @@ export class About extends Component {
                   </h4>
                   <p class='description'>
                     We provide all your statistics from leading competitive
-                    programming websites
+                    programming websites.
                   </p>
                 </div>
 
@@ -70,8 +70,8 @@ export class About extends Component {
                     <a disabled='true'>Upcoming and Live Contest</a>
                   </h4>
                   <p class='description'>
-                    We will provide you all upcoming contest with their
-                    respective details
+                    We will provide you with all upcoming contests with their
+                    respective details.
                   </p>
                 </div>
               </div>
