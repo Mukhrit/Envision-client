@@ -13,9 +13,7 @@ export class Footer extends Component {
                   <div class='footer-info'>
                     <h3>Envision</h3>
                     <p class='pb-3'>
-                      <em>
-                      We are here for you
-                      </em>
+                      <em>We are here to make you shine!</em>
                     </p>
                     {/* <p>
                       A108 Adam Street NY 535022, USA

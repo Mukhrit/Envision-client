@@ -21,8 +21,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (user) => dispatch(loginUser(user)),
   logoutUser: () => dispatch(logoutUser()),
-  filldetailsUser: (user) =>
-    dispatch(filldetailsUser(user)),
+  filldetailsUser: (user) => dispatch(filldetailsUser(user)),
 });
 class Main extends Component {
   render() {
@@ -34,12 +33,13 @@ class Main extends Component {
       <Route
         {...rest}
         render={(props) =>
-          this.props.auth.isAuthenticated === true && this.props.auth.user.username? (
+          this.props.auth.isAuthenticated === true &&
+          this.props.auth.user.username ? (
             <Component {...props} />
           ) : (
             <Redirect
               to={{
-                pathname: "/filldetails",
+                pathname: '/filldetails',
                 state: { from: props.location },
               }}
             />
@@ -77,7 +77,7 @@ class Main extends Component {
       let envision_handle = match.params.envision_handle;
       return <DashboardComponent envision_handle={envision_handle} />;
     };
-    if(this.props.auth.isAuthenticated===false){
+    if (this.props.auth.isAuthenticated === false) {
       return (
         <div>
           <Header
@@ -87,67 +87,72 @@ class Main extends Component {
           />
           <Switch>
             <Route
-              path="/home"
+              path='/home'
               component={() => (
                 <Home auth={this.props.auth} loginUser={this.props.loginUser} />
               )}
             />
             <Route
-              path="/dashboard/:envision_handle"
+              path='/dashboard/:envision_handle'
               component={dashboardshow}
             />
-            <Redirect to="/home" />
+            <Redirect to='/home' />
           </Switch>
-          <Footer/>
+          <Footer />
+        </div>
+      );
+    } else if (
+      this.props.auth.isAuthenticated === true &&
+      !this.props.auth.user.username
+    ) {
+      return (
+        <div>
+          <Header
+            loginUser={this.props.loginUser}
+            logoutUser={this.props.logoutUser}
+            auth={this.props.auth}
+          />
+          <Switch>
+            <Route
+              exact
+              path='/filldetails'
+              component={() => (
+                <Filldetails
+                  auth={this.props.auth}
+                  loginUser={this.props.loginUser}
+                  filldetailsUser={this.props.filldetailsUser}
+                />
+              )}
+            />
+            <Redirect to='/filldetails' />
+          </Switch>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Header
+            loginUser={this.props.loginUser}
+            logoutUser={this.props.logoutUser}
+            auth={this.props.auth}
+          />
+          <Switch>
+            <Route
+              path='/home'
+              component={() => (
+                <Home auth={this.props.auth} loginUser={this.props.loginUser} />
+              )}
+            />
+            <Route
+              path='/dashboard/:envision_handle'
+              component={dashboardshow}
+            />
+            <Redirect to='/home' />
+          </Switch>
+          <Footer />
         </div>
       );
     }
-    else if (this.props.auth.isAuthenticated === true && !this.props.auth.user.username) {
-        return (
-          <div>
-            <Header
-              loginUser={this.props.loginUser}
-              logoutUser={this.props.logoutUser}
-              auth={this.props.auth}
-            />
-            <Switch>
-              <Route
-                exact
-                path="/filldetails"
-                component={() => <Filldetails auth={this.props.auth}  loginUser={this.props.loginUser} filldetailsUser={this.props.filldetailsUser}/>}
-              />
-              <Redirect to="/filldetails" />
-            </Switch>
-          </div>
-        );
-      }else{
-         return (
-           <div>
-             <Header
-               loginUser={this.props.loginUser}
-               logoutUser={this.props.logoutUser}
-               auth={this.props.auth}
-             />
-             <Switch>
-               <Route
-                 path="/home"
-                 component={() => (
-                   <Home
-                     auth={this.props.auth}
-                     loginUser={this.props.loginUser}
-                   />
-                 )}
-               />
-               <Route
-                 path="/dashboard/:envision_handle"
-                 component={dashboardshow}
-               />
-               <Redirect to="/home" />
-             </Switch>
-             <Footer />
-           </div>
-         );
-      }
 
     // return (
     //   <div>

@@ -11,17 +11,16 @@ class DashboardComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      err:false
+      err: false,
     };
   }
   componentDidMount() {
     Axios.get(baseUrl + 'users/' + this.props.envision_handle)
       .then((res) => res.data)
       .then((res) => {
-        if(res[0])
-        this.setState({ user: res[0] });
-        else{
-          this.setState({err:true})
+        if (res[0]) this.setState({ user: res[0] });
+        else {
+          this.setState({ err: true });
         }
         console.log(this.state);
       })
@@ -45,31 +44,40 @@ class DashboardComponent extends React.Component {
         atcoder = this.state.user.atcoder_id;
       }
       return (
-        <div>
-          <div className="dashboard-header"></div>
-          <Dashboardavatar user={this.state.user} />
-          <div className="dashboard-graph-main">
-            <DashCard user={this.state.user} />
+        <div style={{ backgroundColor: 'rgb(0 255 231)' }}>
+          <div className='dashboard-header '></div>
+          <div className='row profile-card' style={{ textAlign: 'center' }}>
+            <div className='col-lg-12 '>
+              <Dashboardavatar user={this.state.user} />
+            </div>
+          </div>
+          <div className='dashboard-graph-main'>
             <GraphMain
               codechef={codechef}
               codeforces={codeforces}
               atcoder={atcoder}
             />
-            <Card3 user={this.state.user} />
+            <div style={{ marginBottom: '50px' }}>
+              <DashCard user={this.state.user} />
+            </div>
+            <div style={{ marginBottom: '50px' }}>
+              <Card3 user={this.state.user} />
+            </div>
             {/* <DashCard user={this.state.user} /> */}
-            <Allcontest contests={this.state.Allcontest} />
+            <div style={{ marginBottom: '-8px' }}>
+              <Allcontest contests={this.state.Allcontest} />
+            </div>
           </div>
         </div>
       );
     } else {
       return (
         <div>
-          <div className="dashboard-header"></div>
-          <div className="dashboard_loader">
-            <div className="dashboard_loader_spin">
-
+          <div className='dashboard-header'></div>
+          <div className='dashboard_loader'>
+            <div className='dashboard_loader_spin'>
               {!this.state.err ? (
-                <i class="fa fa-4x fa-spinner fa-spin "></i>
+                <i class='fa fa-4x fa-spinner fa-spin '></i>
               ) : (
                 <h4>User not found</h4>
               )}
